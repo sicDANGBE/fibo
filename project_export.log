@@ -1,0 +1,21 @@
+[2025-12-23 00:40:11] Source  : .
+[2025-12-23 00:40:11] Sortie  : project_export.md
+[2025-12-23 00:40:11] Fichiers trouvés (avant filtre): 15
+[2025-12-23 00:40:11] Fichiers à concaténer (après filtre): 14 (exclus auto:1 dir:0 file:0)
+[2025-12-23 00:40:11] Concatène [1] compose.yml (size=697)
+[2025-12-23 00:40:11] Concatène [2] go/Dockerfile (size=802)
+[2025-12-23 00:40:11] Concatène [3] go/go.mod (size=365)
+[2025-12-23 00:40:11] Concatène [4] go/go.sum (size=3182)
+[2025-12-23 00:40:11] Concatène [5] go/main.go (size=2057)
+[2025-12-23 00:40:11] Concatène [6] go/pb/sync.pb.go (size=0)
+[2025-12-23 00:40:11] Concatène [7] go/pb/sync_grpc.pb.go (size=0)
+[2025-12-23 00:40:11] Concatène [8] main.go (size=1476)
+[2025-12-23 00:40:11] Concatène [9] node/Dockerfile (size=215)
+[2025-12-23 00:40:11] Concatène [10] node/index.js (size=836)
+[2025-12-23 00:40:11] Concatène [11] project_export.log (size=852)
+[2025-12-23 00:40:11] Concatène [12] proto/sync.proto (size=267)
+[2025-12-23 00:40:11] Concatène [13] python/Dockerfile (size=343)
+[2025-12-23 00:40:11] Concatène [14] python/main.py (size=618)
+[2025-12-23 00:40:11] Concaténation Markdown terminée : 14 fichier(s), 11710 octets.
+[2025-12-23 00:40:11] Aucune règle d’anonymisation — étape sautée.
+[2025-12-23 00:40:11] Terminé. Log détaillé: project_export.log

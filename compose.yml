@@ -1,0 +1,40 @@
+services:
+  fibo-go:
+    build:
+      context: .
+      dockerfile: go/Dockerfile
+    container_name: fibo-go
+    deploy:
+      resources:
+        limits:
+          cpus: '5.0'
+          memory: 5G
+    networks: [fibo-net]
+
+  fibo-python:
+    build:
+      context: .
+      dockerfile: python/Dockerfile
+    depends_on: [fibo-go]
+    deploy:
+      resources:
+        limits:
+          cpus: '5.0'
+          memory: 5G
+    networks: [fibo-net]
+
+  fibo-node:
+    build:
+      context: .
+      dockerfile: node/Dockerfile
+    depends_on: [fibo-go]
+    deploy:
+      resources:
+        limits:
+          cpus: '5.0'
+          memory: 5G
+    networks: [fibo-net]
+
+networks:
+  fibo-net:
+    driver: bridge

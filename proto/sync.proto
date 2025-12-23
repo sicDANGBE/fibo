@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sync;
+
+// Indique que le package fait partie du module 'fibonacci' dans le dossier 'pb'
+option go_package = "fibonacci/pb";
+
+service Barrier {
+  rpc WaitToStart (Empty) returns (StartSignal);
+}
+
+message Empty {}
+message StartSignal {
+  string message = 1;
+}

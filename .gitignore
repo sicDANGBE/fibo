@@ -1,0 +1,15 @@
+# Binaires Go
+go/pb/*.go
+fibo
+fibo-go
+
+# Node
+node_modules/
+npm-debug.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
