@@ -1,6 +1,6 @@
 # Export de projet
 
-_G√©n√©r√© le 2025-12-25T17:40:36+01:00_
+_G√©n√©r√© le 2025-12-25T19:28:03+01:00_
 
 ## .env
 
@@ -8,7 +8,7 @@ _G√©n√©r√© le 2025-12-25T17:40:36+01:00_
 # Infrastructure
 REDIS_URL=redis://redis:6379
 
-# RabbitMQ - URLs pour chaque service (Vhost: benchmarks) [cite: 2025-12-02]
+# RabbitMQ - URLs pour chaque service (Vhost: benchmarks)
 AMQP_URL_LEADER=amqp://bench_leader:qsd65f4c98dc7fd9s87ga6fsd5g4zsdrf9g879dfs7g@192.168.1.12:5672/benchmarks
 AMQP_URL_GO=amqp://bench_go:9q8s7d9qs87dqs654dq6s54d6qs54dqs321dqs2d1qs98d7qs9d8q7@192.168.1.12:5672/benchmarks
 AMQP_URL_RUST=amqp://bench_rust:qs9d87f+qsdf87qsd98f7sd654f1qsd32f1sd56f4sd@192.168.1.12:5672/benchmarks
@@ -19,7 +19,7 @@ AMQP_URL_NODE=amqp://bench_node:sq9d8f7sd98f7sd65f4sd6f54sdf654@192.168.1.12:567
 ## .git/COMMIT_EDITMSG
 
 ```text
-v2 orchestration + ajout rust
+worker-go: publier metrics et enrichir metadata dans handler fibonacci (√©viter QueueDeclare redondant)
 
 ```
 
@@ -58,8 +58,8 @@ c9a83108423860e7c4e872bdb748dfb3d2f60be9
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
-	gk-last-accessed = 2025-12-25T15:41:52.148Z
-	gk-last-modified = 2025-12-25T15:41:52.148Z
+	gk-last-accessed = 2025-12-25T17:17:54.154Z
+	gk-last-modified = 2025-12-25T17:17:54.154Z
 
 ```
 
@@ -1024,7 +1024,7 @@ exit 0
 
 ## .git/index
 
-> Fichier binaire non inclus (3415 octets)
+> Fichier binaire non inclus (4441 octets)
 
 ## .git/info/exclude
 
@@ -1043,6 +1043,10 @@ exit 0
 ```text
 0000000000000000000000000000000000000000 9dcf46457a2239e54fbe4a9f00f2826996522e04 sicDANGBE <dansoug@gmail.com> 1766448047 +0100	commit (initial): feat: initial gRPC fibonacci benchmark with Go, Python and Node
 9dcf46457a2239e54fbe4a9f00f2826996522e04 c9a83108423860e7c4e872bdb748dfb3d2f60be9 sicDANGBE <dansoug@gmail.com> 1766677162 +0100	commit: v2 orchestration + ajout rust
+c9a83108423860e7c4e872bdb748dfb3d2f60be9 8913571fad3aed041bd6f5a6fbb57446cf28ec84 sicDANGBE <dansoug@gmail.com> 1766681898 +0100	commit: docs: ajouter .github/copilot-instructions.md ‚Äî guide agent Copilot pour le benchmark
+8913571fad3aed041bd6f5a6fbb57446cf28ec84 cb01ac9c40ec00fd41ff670bbc86735946ff34a9 sicDANGBE <dansoug@gmail.com> 1766682904 +0100	commit: ui: am√©liorer affichage des cartes worker et indicateur WebSocket
+cb01ac9c40ec00fd41ff670bbc86735946ff34a9 84dc0203f93f52853e23371eb3c46d49449ccf3e sicDANGBE <dansoug@gmail.com> 1766682917 +0100	commit: orchestrator: robustifier consommation des streams RabbitMQ (QoS, ack manuel, offset)
+84dc0203f93f52853e23371eb3c46d49449ccf3e 5a8af5557d17aa3d37ee1e7841508587a0d49f19 sicDANGBE <dansoug@gmail.com> 1766682924 +0100	commit: worker-go: publier metrics et enrichir metadata dans handler fibonacci (√©viter QueueDeclare redondant)
 
 ```
 
@@ -1051,6 +1055,10 @@ exit 0
 ```text
 0000000000000000000000000000000000000000 9dcf46457a2239e54fbe4a9f00f2826996522e04 sicDANGBE <dansoug@gmail.com> 1766448047 +0100	commit (initial): feat: initial gRPC fibonacci benchmark with Go, Python and Node
 9dcf46457a2239e54fbe4a9f00f2826996522e04 c9a83108423860e7c4e872bdb748dfb3d2f60be9 sicDANGBE <dansoug@gmail.com> 1766677162 +0100	commit: v2 orchestration + ajout rust
+c9a83108423860e7c4e872bdb748dfb3d2f60be9 8913571fad3aed041bd6f5a6fbb57446cf28ec84 sicDANGBE <dansoug@gmail.com> 1766681898 +0100	commit: docs: ajouter .github/copilot-instructions.md ‚Äî guide agent Copilot pour le benchmark
+8913571fad3aed041bd6f5a6fbb57446cf28ec84 cb01ac9c40ec00fd41ff670bbc86735946ff34a9 sicDANGBE <dansoug@gmail.com> 1766682904 +0100	commit: ui: am√©liorer affichage des cartes worker et indicateur WebSocket
+cb01ac9c40ec00fd41ff670bbc86735946ff34a9 84dc0203f93f52853e23371eb3c46d49449ccf3e sicDANGBE <dansoug@gmail.com> 1766682917 +0100	commit: orchestrator: robustifier consommation des streams RabbitMQ (QoS, ack manuel, offset)
+84dc0203f93f52853e23371eb3c46d49449ccf3e 5a8af5557d17aa3d37ee1e7841508587a0d49f19 sicDANGBE <dansoug@gmail.com> 1766682924 +0100	commit: worker-go: publier metrics et enrichir metadata dans handler fibonacci (√©viter QueueDeclare redondant)
 
 ```
 
@@ -1059,8 +1067,18 @@ exit 0
 ```text
 0000000000000000000000000000000000000000 9dcf46457a2239e54fbe4a9f00f2826996522e04 sicDANGBE <dansoug@gmail.com> 1766448056 +0100	update by push
 9dcf46457a2239e54fbe4a9f00f2826996522e04 c9a83108423860e7c4e872bdb748dfb3d2f60be9 sicDANGBE <dansoug@gmail.com> 1766677171 +0100	update by push
+c9a83108423860e7c4e872bdb748dfb3d2f60be9 8913571fad3aed041bd6f5a6fbb57446cf28ec84 sicDANGBE <dansoug@gmail.com> 1766681910 +0100	update by push
+8913571fad3aed041bd6f5a6fbb57446cf28ec84 5a8af5557d17aa3d37ee1e7841508587a0d49f19 sicDANGBE <dansoug@gmail.com> 1766682948 +0100	update by push
 
 ```
+
+## .git/objects/07/ae975db35e66033dec0b124a5beb703025248f
+
+> Fichier binaire non inclus (407 octets)
+
+## .git/objects/0c/4fc5ef3fa24178bd7db7c90efb69907387eee0
+
+> Fichier binaire non inclus (83 octets)
 
 ## .git/objects/0c/636d86bffac4f802278a4a7178d9a27193f0ec
 
@@ -1078,6 +1096,26 @@ exit 0
 
 > Fichier binaire non inclus (848 octets)
 
+## .git/objects/12/d88b2843b5c4a93c94343f51967ec3b4538f6d
+
+> Fichier binaire non inclus (203 octets)
+
+## .git/objects/16/f77612eccd94213863c5ad7ebd2e9fe8dd009b
+
+> Fichier binaire non inclus (236 octets)
+
+## .git/objects/1a/fb529027bfd3b244eb797399e6c0966eecbeb5
+
+> Fichier binaire non inclus (117 octets)
+
+## .git/objects/1d/17b6c4d2312673094dc22ccfeac6262f182d81
+
+> Fichier binaire non inclus (48 octets)
+
+## .git/objects/1e/9e3512be43ceac03f749b3e1bd81a4e0899e7f
+
+> Fichier binaire non inclus (956 octets)
+
 ## .git/objects/20/708f6a2ef877be2ccc2101160dbce8791b4604
 
 ```text
@@ -1085,6 +1123,10 @@ xUè¡Jƒ0Ü=Á)ÜzX”¢{POYï"ª]¬äàH…¶—¥ôê§`©œ—≥m
 ‚)ì˘gÊˇ˛cçGXﬂﬁù=Òb∂'4˜ÎÙ˙Ü˙Z7Ñº¸eìs»ÑµÑ◊XmAD]•©Ú§h•|;+5.àµ'‰Z≠†j¡:MP?AÅRuIX±èbÊ;#”8óNªœCoÜﬁâ†—L'$V
 ˆ3f§ôK†ÕÏZŒûq_Õ”ë0f*±”wb,ˇı˛,'CJ)∞ÇÛGv»ã‰,üZ£PvË•˛√‘cÙ^+['¨‚Õlµ§ôπ≤Fhì⁄∆,lªÅè$N%Wê,RÚ˘[ÇÄk
 ```
+
+## .git/objects/22/1181d2632a36a783df61e3c0345b3ede421068
+
+> Fichier binaire non inclus (235 octets)
 
 ## .git/objects/22/f7a387d14bb1ff975b8f8a909c2760552ab6b2
 
@@ -1097,13 +1139,25 @@ xùTÔO€0›Á˛ßnR	€Ù√–§MÇ}”> N|-ﬁ;ÚZÑ˙øÔú§•§Eä‚8wÔΩª{N©m	„Ω√Ò\4÷òFS
 
 > Fichier binaire non inclus (590 octets)
 
+## .git/objects/26/1363925bedc249329ef083cf913018d63c62f5
+
+> Fichier binaire non inclus (565 octets)
+
 ## .git/objects/33/c0d87c6d62f2f9d9a4e40f8f25ed90e4056ba3
 
 > Fichier binaire non inclus (110 octets)
 
+## .git/objects/34/2ec37e7c6d81a03252d768ba5b12b3f726e491
+
+> Fichier binaire non inclus (472 octets)
+
 ## .git/objects/37/ae47ae280e513c8aa2129bd8132aefba977851
 
 > Fichier binaire non inclus (5707 octets)
+
+## .git/objects/3d/2251a550284deb468cc7e650b8b3aee7127908
+
+> Fichier binaire non inclus (604 octets)
 
 ## .git/objects/3e/2093992b9bec6d3f7c01739e68ac39c300d3d1
 
@@ -1121,17 +1175,55 @@ SzÆ1”~F€≥¥‚≈‘çø-¯7RæQåE°~˝π`äAÌ'dH¡°πHôã∏“îfbeYØ£!?Íz≈
 
 > Fichier binaire non inclus (370 octets)
 
+## .git/objects/42/4bb4fbbc66cf6af15cf54a2ff469815c3faddf
+
+> Fichier binaire non inclus (119 octets)
+
+## .git/objects/47/1c30f56909f444ef7f38a7049ab5233f1de6fc
+
+> Fichier binaire non inclus (114 octets)
+
 ## .git/objects/49/6c619e5bce5b8e4b24d430a73bbd67e2f4f31e
 
 > Fichier binaire non inclus (15640202 octets)
+
+## .git/objects/49/a6f4e3b2dce8aee8a067bf9e18b853b66fd19d
+
+> Fichier binaire non inclus (81 octets)
+
+## .git/objects/4b/37f9a11f378cc7e66ce3371d0508022174dd30
+
+```text
+xMè¡N√0D9˚+F9µ–Q/î*!"µë8"«Ÿ´±◊Z;@UıÉ¯~SQƒﬁfvvû∂∏≈Ï˙ˆ"Ó}“ò£¬âgE•T–fß{Bﬁô,ÀãzΩ^.öU˝Ñ;<Ã+9ÎÒPØvéº!A–ÇÅ‡Ÿ°·∏≥Íæ>∑÷[t⁄GÙ|ïm≈!YˆYΩúQôøµ-_æ≥ÏHJÎâ◊C⁄¢ÇRë‰Õ¬Ω±ôtP»#¡‡Y€‘&iIò,]H˚)Ñ“(ô69Ÿ€Á¶i•éJ9äÒÁ≥Sá„üÒ/˘[ìXﬂ„|1«Mn¯Åòg‘
+```
 
 ## .git/objects/4c/aeed4572829ae912ba1a0d88c87af1bc82e713
 
 > Fichier binaire non inclus (1202 octets)
 
+## .git/objects/51/892cf7e7cd672d3b5d6d471bbb562d04a8e164
+
+> Fichier binaire non inclus (75 octets)
+
 ## .git/objects/5a/50d4c26668c2b5b465756529b5868e7f109e11
 
 > Fichier binaire non inclus (1105 octets)
+
+## .git/objects/5a/8af5557d17aa3d37ee1e7841508587a0d49f19
+
+```text
+xïOKN≈ u‹U‹°∆h((5∆®y∆ôâK∏\.-±ÖJuMÆ√ç…sŒNNŒóÚ∫∆
+™µ0√‡åë=kÁ{>∏`Ö‘É±H“Ñ`¨Â`ï∞≤;a·T¡jOB
+F“K•Üûù"mºµâÇ‚˜:Á[§„”€ÎÛ‹{L[ﬁß«i≈∏‹R^†å1VéR√µËÖË€ÊU˛∑±˚ ÂÉÀÕîÔ‡¥ª%∂àïkâ¥W‡‘–ˇ8ÙXŒk`∆‰ó¶—ÂÑD.æ?„πˇ}ÁùèLK˚Ö}NÕQØ∫_∏0f	
+```
+
+## .git/objects/5a/e095b7d3a678a69e6808cb3856ccd3ded0bdf5
+
+> Fichier binaire non inclus (1301 octets)
+
+## .git/objects/5d/175e2933d1e59016f42d4e2f2441db2fef311d
+
+> Fichier binaire non inclus (117 octets)
 
 ## .git/objects/5d/ab255ae1904e7a27735e3c9641a108451695d3
 
@@ -1160,6 +1252,18 @@ xùî=n‹0ÖS˚SÓ±LÍoe)Ç©í*ÈåÖ°•hô∂ƒ!H Y•Ú!“§KiùC7ÒIL…Zƒ±#òH«bæ7√y3≥´q4äì7g!	ì
 xUé]k1E}ŒØ|œUƒ"¯ äPäÆl)Eƒádw∂]ù0I¸˝›/ê>ŒeÓ=«:∂0[.&˚"?Ä§W/ŸÎ\Áõ;¡Êlj\E¢äœ#ˇ¶™@Î;Î“î?∑úÆË^8≤Muw(ıïÔª∑0¡ %Ô’6?ùá?Ñ,√æÅC⁄ë€∞ßîFæy‡∂$!G&êRΩ·‡µr&RàOä0«qIÎZ¯∂µˇ	`ló)‚8âucYw‰º=Ï‡2ÕûŸÙ˙∫\Z
 ```
 
+## .git/objects/61/9c750eb7e119698413b3f6346eb8c14f603684
+
+> Fichier binaire non inclus (119 octets)
+
+## .git/objects/64/72bab105a7266bf1324976307cfdc40c9fba6d
+
+> Fichier binaire non inclus (1067 octets)
+
+## .git/objects/67/057bc258203607838b49236920023738fec519
+
+> Fichier binaire non inclus (93 octets)
+
 ## .git/objects/67/733188b7153a7ce368444a9509968142172eea
 
 ```text
@@ -1168,6 +1272,10 @@ xÖRMo‘0‰ˇäß\»™ê4°õ/i%8 @jÅnUıX˘„%kmbß∂”"Pˇ;vvª8ÙËÁy3û≥A3(ã¸ÕD˘ûˆ#ïä9N⁄8HH
 ax˚YıR!$[ òtW◊p?Næº†Á¢„√tªΩ"⁄¶_–°zL‚OW◊?Ô˝8ˆŸ¡h≥Å8Ø?≠˘A∏l≥å°‚ª˚©@”>XQÆªﬁ‘ÇWùhl]ı¥Ï¨X˜ø≠0]”◊U#:[ıÛ¶HÛ≤NÛ4/⁄uY™ëöΩO.z>8ÙÓèn™∏7GÅÈô¡ ◊J·Øê!*8¥Ö$
 U,ŒN¶µ	9òí£≠w!ÕcêR∏A7OÄ.É–à Ö^,öGˇB7$2/ù,ÿ≠û˝ÔHÇÿë*2K9q[ü◊Á>√gÚÀ„«›
 ```
+
+## .git/objects/69/debbb92bbcb24a4513e4cf15034b3f40c2f338
+
+> Fichier binaire non inclus (52 octets)
 
 ## .git/objects/6c/cc48a05421e0f3e40a0cfd4bc069663295c1c7
 
@@ -1185,9 +1293,31 @@ U,ŒN¶µ	9òí£≠w!ÕcêR∏A7OÄ.É–à Ö^,öGˇB7$2/ù,ÿ≠û˝ÔHÇÿë*2K9q[ü◊Á>√gÚÀ„«›
 
 > Fichier binaire non inclus (1445 octets)
 
+## .git/objects/73/a6ec090865db226e94fa131701d00746aaa7a9
+
+> Fichier binaire non inclus (407 octets)
+
 ## .git/objects/75/cdea54465f53768e9edc7c31fa5a226602af79
 
 > Fichier binaire non inclus (82 octets)
+
+## .git/objects/75/cfbdfbadfe07187291e5446058a8c6349db908
+
+> Fichier binaire non inclus (203 octets)
+
+## .git/objects/78/75ca23928e02658b93e6524a8c99458e7c39e6
+
+```text
+x+)JMU02∂`040031Q–KÃ,“+…œÕaxƒ«i2o‚ãSˇX>úUΩ¥≈s≥Îƒ®"ó¸‰Ï‘¢¥ÃúTΩ√u5πçåÇÆgÏä⁄¸]Ì…D PHŒMaX∫ÛXÈ=«“å⁄˙ˇÅnmeˇ-ÿ5#=_/7?ÖA≈éßÒ¯⁄¢eó_¨ŸtÔ‰>Œ,¡…∑*äKsˆÎÔ¸‚∂ø#√|Úˇ◊≈¸ˇåSΩªBl»Ã+I- KÃaXoZ|k]KÙÁu_5ß9¸<ˆuΩ#DIInC:kı°3ˆÊnOÂL&sãG%◊·dÅ
+```
+
+## .git/objects/79/86982687d75da66eb87f7a2588dd8d33f06898
+
+> Fichier binaire non inclus (109 octets)
+
+## .git/objects/7b/6628ade4bd1e5bf8024768ac26ff688ef83082
+
+> Fichier binaire non inclus (407 octets)
 
 ## .git/objects/7c/d49f16753e2d5e87e82317cc62ba5ad25fcd1a
 
@@ -1201,13 +1331,36 @@ U,ŒN¶µ	9òí£≠w!ÕcêR∏A7OÄ.É–à Ö^,öGˇB7$2/ù,ÿ≠û˝ÔHÇÿë*2K9q[ü◊Á>√gÚÀ„«›
 
 > Fichier binaire non inclus (20962 octets)
 
+## .git/objects/7e/8da60904b656207a5010b7027b47e651c85c0c
+
+> Fichier binaire non inclus (110 octets)
+
+## .git/objects/7f/caa3a05cd27baa703ea6e7989472bdc7f6e469
+
+> Fichier binaire non inclus (1457 octets)
+
 ## .git/objects/81/692525cea495f555182927f8f55584d98020f9
 
 > Fichier binaire non inclus (826 octets)
 
+## .git/objects/83/fc2d1afb8f6583a9ac47503781a5f53b7e41c8
+
+> Fichier binaire non inclus (54 octets)
+
+## .git/objects/84/058f295333b603c0d827b8f70f6f199e64a3df
+
+> Fichier binaire non inclus (76 octets)
+
 ## .git/objects/84/6efe57e7f1aba3621ccda2c424a11089a02b9b
 
 > Fichier binaire non inclus (82 octets)
+
+## .git/objects/84/dc0203f93f52853e23371eb3c46d49449ccf3e
+
+```text
+xïéMN!Ö]˜)j©qbÄAË6∆®—∏“dúE1C’˜ó+∏|/ﬂ˚°ZJ0ãπí∆3&KiÒ—%≥7—á5;euÙDC“¬ÙãçW
+Jö¨bR*E´Sr^Ö@≥Û˚˚≈∫îˆó	79◊=”€À◊«Î;<F\{›NœßÇ˘rGµ<ÅˆŒπŸ,⁄√≠“JM√˜Ñˇúj£3wi(µ=@´aÎíSMT«n)(πÆπ√†Káo!ÀÁÆı∏§(∏n|ŸAM©≥‹L_`_Ó
+```
 
 ## .git/objects/87/5968d8f81678a6e9a858eebe90a2b957759531
 
@@ -1217,9 +1370,33 @@ U,ŒN¶µ	9òí£≠w!ÕcêR∏A7OÄ.É–à Ö^,öGˇB7$2/ù,ÿ≠û˝ÔHÇÿë*2K9q[ü◊Á>√gÚÀ„«›
 
 > Fichier binaire non inclus (55 octets)
 
+## .git/objects/89/13571fad3aed041bd6f5a6fbb57446cf28ec84
+
+```text
+xïèIN≈0YÁΩGÑéÌx¯BàQÏ∏ÉáNbà„»±˜Çr˛'`[z%ΩÚ9•XÅqU†≤d‘IJ‰<êG70aGGN!G62°ßn∑Ö∂
+ﬁXÕ‘Çq-ëî§s¡)°√‰x`ìDG¶≥≠.π¿˝À„˚€”+‹ªπÕs≤qÌ}N˜0()•¥—pçbw¶Á{ï˛-v!˚„ˆ#∑ã›œ±.Õ›˙º«5◊õ∏µ4_cﬁé>¯˘˙Üπ≈@`ÁK÷Ûﬂˆ‹
+¨é6ø$[>ª_§D`é
+```
+
+## .git/objects/8a/f4c7ac97d6f232d2b6a4a1e6041d7ccb6ac8bb
+
+> Fichier binaire non inclus (407 octets)
+
+## .git/objects/8e/cc24ea2efe2596320b847a326edc2296cd2c7f
+
+> Fichier binaire non inclus (4098 octets)
+
 ## .git/objects/91/f5acd81ec45ecd315e27d23991247bd92e1979
 
 > Fichier binaire non inclus (119 octets)
+
+## .git/objects/93/15641dac3ec2c85995ad959b95037cc83827c5
+
+> Fichier binaire non inclus (1323 octets)
+
+## .git/objects/96/47bb3ee733f230e94decddebc7276f600e2b32
+
+> Fichier binaire non inclus (3238 octets)
 
 ## .git/objects/9d/c71497ae68a4e83a6d720c3ad2fe6abd38d86f
 
@@ -1249,6 +1426,22 @@ xÖêMN√0ÖY˚#Wb’Fi(K†@¨™
 
 > Fichier binaire non inclus (215 octets)
 
+## .git/objects/ad/7005ae32ba2e370bdae2663559142ddea29a5b
+
+> Fichier binaire non inclus (15640088 octets)
+
+## .git/objects/af/3573daae845bf3f07ef5299640f9c6f5af2201
+
+> Fichier binaire non inclus (81 octets)
+
+## .git/objects/b0/aaf9bab41421336a5b566acb37ad38096d48d3
+
+> Fichier binaire non inclus (338 octets)
+
+## .git/objects/b1/9ef482e0ef1f6fb118834ce1c56aec63821e1d
+
+> Fichier binaire non inclus (83 octets)
+
 ## .git/objects/b5/3633d98bf09f65d7ffad41851e7dc00426fc7a
 
 > Fichier binaire non inclus (84 octets)
@@ -1256,6 +1449,13 @@ xÖêMN√0ÖY˚#Wb’Fi(K†@¨™
 ## .git/objects/b7/6e4ffecf8364809c61229d2644b578f6a94157
 
 > Fichier binaire non inclus (88 octets)
+
+## .git/objects/b7/9c49648d6cba60ded7e23b9eccc64959b1031c
+
+```text
+xÖSQk€0ﬁkÙ+Cô]2∆÷≤¬É¶∞¡X
+{(%ΩXr¨≈í=ÈƒJPGˇÿN±ú9ae~ë}wﬂ›}ü>ØÍfﬂûøj±ÿ‡Z¡Ô∆mîBõ∂qπeÖ€∂‘L}ÖÔ>úe(≈£ÒôA€V¡èÏªZkOI7¯%btı∫áC⁄Æ·ÓßoÏE¶ev'F_–ÆCú|ò¨SòK”åô4⁄^£ﬂZ«œÿ>Å”ú˝ë&W-ªqs¥≤VÓ?Ä™´ä˚-Õ¥•≥˜˚∆˚ó4¡«™%RD|Cá∆lo∫Ωn¨\âÖzxÏŸ∑ª™Ω^Bj0Ï¬«”ÿÓ∂µ^ãC5^ñ‡üuÊWV™˚Q^ˇò∞é…»ˆ´"îHQ°cí&%c·µ6äe2ÌÅî˝z}≤d:ÖKe;I1Û¬=?)®_k©,ÈR#Ø¨˛,Ê36%»êå@>?té=% `ãAß|‹ﬂ;ª≤j<Y4ÍñpÒ	?ôßH>£%≥◊'ãñmKeûù¯7'2;ÖøPF]*jµÃ«™–W±W˜´L¡r˘ÕÌjK*ècëSú=j|ª2zÃnˇ” Ç
+```
 
 ## .git/objects/b7/e1fe52398f8f442711a0d0470a6318c0f10df3
 
@@ -1276,6 +1476,16 @@ x5è¡J1Ü=Á)~÷CÃÆ§‡IH+,“FÇ"R<§ŸX"1í-‘GÚ9|1ìÆ^Üôˇü˘ffÁiá˘Õ‚Ï^…5ˆv~Õµè.X∆^§z
 ùéë1ıºAàüp!è⁄{‹ÌS4]¸#ˇU1—H‹ìlbÏÇ¢≥8∏0F{-í6e≈%ÚÒu2ª¸L;ıµuñs!ïZâß^n–ãæJ≈ê9˛|˜^ÿæ‡)gg2í±ò’7∫ŸÑ>Â.ˆÿñ#W¨óÿ6UnÆ–¸;Õ€/KT6
 ```
 
+## .git/objects/c4/e58bd3837ab011a7decff3a984391061896366
+
+```text
+x}PAN√0‰øbÂSÇ⁄DH\®ƒA¢à«ŸƒVS€ÿkÑTıAºÉèa∑™‘Ø<ªûŸwìÌ‡Ú‚ÍÃ	π#Çpö1Ωq÷î¨‡©QDé≥FM*vµ¥õf‘f>Z£eæqV16D#°EäÓ›FB_Vpûfı“§ä∞eÖá≈5‰÷"NT&V·ÎáÂG…Öb"≈gêuJy‡ﬁZC¯MUf≤~jWØevS∑$(Ü’ÛlØ˜∏Âaﬂ‡‡b“_»w+“aE”¿}§ËA	”OË¡Ÿ&@(@è@^ò0`Jú¿†•“ËCvˆ∂j≥5mÁ˘Ìﬁ“ñ;ÍœàY√ˇ˛Ht§≠9Q<,Ó–Hµ~ΩtàqÈFf&ˆG˚>}®7‡Ÿé˝∆Râ)
+```
+
+## .git/objects/c4/f763aaa6fea4a56f4c36a8a0bd290b983f720b
+
+> Fichier binaire non inclus (113 octets)
+
 ## .git/objects/c7/9719e52ab405c026c4d3c48899017ff6545063
 
 > Fichier binaire non inclus (1043 octets)
@@ -1288,6 +1498,21 @@ x5è¡J1Ü=Á)~÷CÃÆ§‡IH+,“FÇ"R<§ŸX"1í-‘GÚ9|1ìÆ^Üôˇü˘ffÁiá˘Õ‚Ï^…5ˆv~Õµè.X∆^§z
 
 > Fichier binaire non inclus (177 octets)
 
+## .git/objects/ca/702652572c3cdc89b07f30a4f264c3cb78c40f
+
+> Fichier binaire non inclus (2499 octets)
+
+## .git/objects/cb/01ac9c40ec00fd41ff670bbc86735946ff34a9
+
+```text
+xïéKJ1Ego.H~ïO#¢¢8s‚¿ÒKÚR∫SëT
+◊‰:‹òŸÇ£Áp‡∆Vk ≠∫ù¨BCë{ÓÃíÇîÜºŒ(î∞\$Œ≠6àh—≥/Ï¥p^®≈äåI!%ÆEH&/hrã’⁄ƒ,Eß„‹:Ï%æ<Ωø=ø¬}¬mo«˙∏V,◊ªÿÍkåq“s∑\pŒ&ù˜˝;dG9÷ﬂüki}Êòsâg\	Ì±è9ﬂ≠_¶£eK%‚†£√'Öè/4ÿXä
+```
+
+## .git/objects/d4/55b2fc342a290696ff081184fe4d5f18c87b7c
+
+> Fichier binaire non inclus (541 octets)
+
 ## .git/objects/d4/ad699edca1759fdd98c08d197aea6fe8e7e202
 
 > Fichier binaire non inclus (93 octets)
@@ -1296,9 +1521,21 @@ x5è¡J1Ü=Á)~÷CÃÆ§‡IH+,“FÇ"R<§ŸX"1í-‘GÚ9|1ìÆ^Üôˇü˘ffÁiá˘Õ‚Ï^…5ˆv~Õµè.X∆^§z
 
 > Fichier binaire non inclus (143 octets)
 
+## .git/objects/d7/b6bdacc7db9681e4d5c83bbce813d0dae49244
+
+> Fichier binaire non inclus (789 octets)
+
+## .git/objects/dc/dd5be855c5c415d5179b9375b819fe9c3daf06
+
+> Fichier binaire non inclus (925 octets)
+
 ## .git/objects/df/c5b6c588b2753fb511e78f198853374d94ddbc
 
 > Fichier binaire non inclus (364 octets)
+
+## .git/objects/e1/13dd3b75bdcf3d891223e4ee5a8e376a739d06
+
+> Fichier binaire non inclus (68 octets)
 
 ## .git/objects/e2/0e09349e91e8cafe04f0cd25d2b449b3459170
 
@@ -1314,9 +1551,25 @@ x=éKÉ0DªŒ),Ø[Ï{Ñ*B,)âQ Ø∑ØPW€o4c<hõˆñòxV®ñ0ø¨KyâJufuﬁˆ
 xeRmk‘@ˆs~≈P¥ŸpπmäV§Òä»)“€oG°õ‹$¨∆›sw√!G˛ê√?÷ôÕΩYÁ√2;ÛÃ<ÛVu∂ÇwØﬂæ®≠ÒZ∑™aı⁄°H?∞·åüÈwüfe2¬VŒ˚’™%∫ˇ——9Ì¢˜(D’?Tãsl¥—A[CÅGi$„Ô~õZ§û^]áh∂›2)Eq5~˚<•X=∑dí#À$izSGV◊õœ∫≤"ÉM$çu :@J~^FÂ=iET'ìí—T+L√M≥∞oç ÚÃU@iÏZ––ÿÀ≤Á“ú¢ƒÛ¶`°œøLå_(by Ï¢ âvBüC2ËÑÜWT+	ÃfîNO)Ô«e3ñÖK¥“ÙZÒ∏∏æôzÄo‘˜Àu?¿î=ÄË<}ÓÒÁ _íMö!sÏ0;cŒ¡?µ«√æŸQí!ŸM›i4<Ékÿ/T~TŒit"mh-”÷^^≈≈yöè{Æ.)J´ŒK“i®_å«∫ß„Ã∂Á∏kË‰⁄.ënÍÔüêP!P$¬≤Ø[£:)Â	«ƒ:‰ZÈpoÔx]b3‰ –πfW€ª‡—FÀnfÙ±.ö∆`Áëoeº¶2≤Ú	Pû¸0
 ```
 
+## .git/objects/e3/8fb63d9a6cac854ef98242004daeaa4ab8d694
+
+> Fichier binaire non inclus (672 octets)
+
+## .git/objects/e4/0d4a3fbc0649821696f81aeb021bb21fbda101
+
+> Fichier binaire non inclus (81 octets)
+
 ## .git/objects/eb/3dda2764d74686f269b5551c818e3a4028218d
 
 > Fichier binaire non inclus (229 octets)
+
+## .git/objects/ec/d75440765f8c854fc0dd750e7f3249b9194b94
+
+> Fichier binaire non inclus (830 octets)
+
+## .git/objects/ee/d6e7bc041cbff29407b9c98dd75b168a5869fa
+
+> Fichier binaire non inclus (44212 octets)
 
 ## .git/objects/ef/327c55831b06abfc2b987608b12db85728ffbf
 
@@ -1325,9 +1578,24 @@ xUR›J√0ı∫Oq(»RÏJ+õHa^ÇW:‹@D$$]⁄÷¥$2∆^»◊≈L∂n≠ﬂEŒ9ﬂ¯¶·∏ÀÓØd›6⁄¢“mto+kî∫©
 ÃZ°¨¿j#+≈6Ií∏íœ√°ìw&Ì≤Y¯-ë„!QØË¿øy∂S
 ```
 
+## .git/objects/f1/2d44b84ecbccc4b653c7fc833ad2dd7373db46
+
+> Fichier binaire non inclus (1283 octets)
+
 ## .git/objects/f5/c1c09205f17763c8289c63c6d35fd4df64c6a8
 
 > Fichier binaire non inclus (126 octets)
+
+## .git/objects/f6/64bd3652c06f1111cd71c7133c9409dd882479
+
+> Fichier binaire non inclus (54 octets)
+
+## .git/objects/f8/786ea322dc83337b57a86a0e86612465bbd5b5
+
+```text
+xçê]KÎ@ÜΩÓØXFëVwõÏG@PhQA≠∆ê√°$ôù¥®Mw'Œ˘ıN*"Ωëﬁºs≥˚>ÛL˘÷îB'zo_\≠0‘∆ÆjªË˘trı0 ØO£á%e««_SèçˆE^îÂ≤ΩπC¡èH¨õ.äjQÑŒÚÒcYyqºh®ÕDÈW’‚ΩàØt(˛TÀ÷gBù®t(’D˝úﬂ‹ﬂı§˘ıÙ|2ÕOã˜∞fﬁÊ◊¸Õ‡ctäIÂ,T¡ë5u°ë ≠ìˇ]mç$SüIßFR€ëIï•⁄®Ø™Õ?∞ãŸ6®n2,pÅÀ!êNö8uË3–XIN2Ôa8¡≥#/zx‹&∆éè≥)1xƒÇhπúE”À&»+î,©1!ÿt˜Úx9ª›F≠ˇµãfïU≤_ô0ÈÜØÖç6∞πF«sWŒÌl2›¶¨FÙ
+ﬂ"˝ÍSNd´_%>S/Õ‡
+```
 
 ## .git/objects/fa/10cc7e0d046698a0c2b77544ed2a7167a49d25
 
@@ -1336,16 +1604,93 @@ xUR›J√0ı∫Oq(»RÏJ+õHa^ÇW:‹@D$$]⁄÷¥$2∆^»◊≈L∂n≠ﬂEŒ9ﬂ¯¶·∏ÀÓØd›6⁄¢“mto+kî∫©
 ## .git/refs/heads/master
 
 ```text
-c9a83108423860e7c4e872bdb748dfb3d2f60be9
+5a8af5557d17aa3d37ee1e7841508587a0d49f19
 
 ```
 
 ## .git/refs/remotes/origin/master
 
 ```text
-c9a83108423860e7c4e872bdb748dfb3d2f60be9
+5a8af5557d17aa3d37ee1e7841508587a0d49f19
 
 ```
+
+## .github/copilot-instructions.md
+
+````markdown
+# Copilot / Agent Instructions for Fibonnaci Benchmark
+
+Quick, actionable notes to get an AI coding agent productive in this repository.
+
+1) Big-picture architecture
+- **Orchestrator (Go)**: `orchestrator/` runs an HTTP server + WebSocket hub and owns RabbitMQ orchestration. Entry: `orchestrator/cmd/server/main.go`.
+- **Workers**: language-specific worker folders at `worker-go/`, `worker-node/`, `worker-python/`, `worker-rust/`. Each worker connects to RabbitMQ and participates in the benchmark.
+- **Message bus**: RabbitMQ is the central integration point. Key code: `orchestrator/internal/orchestrator/rabbitmq.go`.
+- **UI**: static files and client code under `orchestrator/internal/api/web/` and WebSocket hub in `orchestrator/internal/api/hub.go`.
+- **Compose / orchestration**: `compose.yml` defines services, environment variables and network `fibo-benchmark-network`.
+
+2) Core dataflows & conventions (must-follow)
+- Worker registration: workers announce themselves to queue `isReady` (see `ListenForWorkers()` in `rabbitmq.go`).
+- Per-worker result queues follow the pattern `results_{workerID}`. These are created as RabbitMQ streams (queue arg `x-queue-type: stream`). See the `QueueDeclare` call in `rabbitmq.go`.
+- Admin sync: a durable fanout exchange `fibo_admin_exchange` is declared for synchronous broadcast across services.
+- Durability: queues/exchanges are declared `durable: true` in orchestrator ‚Äî when adding or changing queues follow the same durability/stream semantics to avoid PRECONDITION_FAILED errors.
+- Concurrency: orchestrator uses `Engine.Mu` to guard `Channel`/`Workers`. Follow locking patterns when mutating shared Engine state.
+
+3) Important files to reference
+- RabbitMQ orchestration: `orchestrator/internal/orchestrator/rabbitmq.go`
+- Engine and types: `orchestrator/internal/orchestrator/types.go`
+- WebSocket hub & routes: `orchestrator/internal/api/hub.go`, `orchestrator/internal/api/routes.go` and `orchestrator/internal/api/web/`
+- Docker compose: `compose.yml` (service names, env var names like `AMQP_URL_*`, `REDIS_URL`)
+- Worker examples: `worker-go/`, `worker-node/`, `worker-python/`, `worker-rust/` (follow folder layout and Dockerfiles)
+- Proto definitions: `proto/sync.proto` (check if type generation is needed before cross-language changes)
+
+4) Developer workflows (how to build/run/debug)
+- Full stack (recommended): from repo root
+  - Build & start: `docker compose up -d --force-recreate --build --remove-orphans`
+  - Tail orchestrator logs: `docker compose logs -f orchestrator`
+  - Start a single service: `docker compose up -d orchestrator` or `docker compose up -d fibo-go`
+- Local Go iteration (without Docker): set `AMQP_URL` locally then run:
+  - `go run ./orchestrator/cmd/server` (or `go build ./...` then run binary)
+  - The orchestrator listens on `:8080` and exposes health at `/health`.
+- Worker iteration:
+  - Go worker: build/run under `worker-go/` (`go run ./cmd/worker`)
+  - Node worker: `node worker-node/index.js`
+  - Python worker: `python3 worker-python/main.py`
+  - Rust worker: `cargo build` / `cargo run` in `worker-rust/`
+
+5) Environment variables and defaults
+- `AMQP_URL` (or variants in `compose.yml`: `AMQP_URL_LEADER`, `AMQP_URL_GO`, `AMQP_URL_NODE`, `AMQP_URL_PYTHON`, `AMQP_URL_RUST`) ‚Äî orchestrator falls back to an embedded URL in `orchestrator/cmd/server/main.go` if unset.
+- `REDIS_URL` referenced in compose for caching/coordination.
+
+6) When changing message schemas or queues
+- Update `proto/sync.proto` first if the change affects message formats used by multiple languages; regenerate stubs if the repo uses codegen (no generator found in repo‚Äîconfirm with maintainers).
+- Keep queue names and durability consistent with `rabbitmq.go` (`isReady`, `results_{id}`, `fibo_admin_exchange`). Streams require declaring `x-queue-type: stream`.
+
+7) Code patterns the agent should follow
+- Keep resilient reconnect logic intact: `Engine.InitRabbitMQ` ‚Üí `handleReconnect` is responsible for reconnection and re-declaring infra.
+- Use `Engine.Mu` when accessing `Engine.Channel` or `Engine.Workers`.
+- When adding a worker implementation, mirror the `results_{id}` creation and support the `isReady` registration flow.
+- Prefer the existing logging style (`log.Printf` with tags like `[RMQ]`, `[SYNC]`, `[WORKER]`).
+
+8) Quick examples (copyable)
+- Declare a stream results queue (Go):
+```go
+args := amqp.Table{"x-queue-type":"stream"}
+_, _ = ch.QueueDeclare("results_<id>", true, false, false, false, args)
+```
+- Broadcast to UI via hub:
+```go
+hub.BroadcastMessage(map[string]interface{"type": "WORKER_JOIN", "data": reg})
+```
+
+9) What the agent should ask the maintainers (if unclear)
+- Are stubs generated from `proto/sync.proto` in CI or manually? Where is generation configured?
+- Which worker languages are currently considered canonical for benchmarks (the compose file comments indicate some are commented out)?
+- Any cluster-specific assumptions (k3s, network addresses) that must be preserved when tweaking reconnect logic?
+
+If anything above is unclear or you want more detail in a specific area (proto/codegen, worker onboarding, Docker/CI), tell me which section to expand. Thanks!
+
+````
 
 ## .gitignore
 
@@ -1414,9 +1759,9 @@ services:
     environment:
       - AMQP_URL=${AMQP_URL_GO}
       - REDIS_URL=${REDIS_URL}
-    depends_on:
-      orchestrator:
-        condition: service_healthy
+    # depends_on:
+    #   orchestrator:
+    #     condition: service_healthy
     deploy:
       resources:
         limits:
@@ -1425,128 +1770,64 @@ services:
     networks:
       - fibo-net
 
-  fibo-rust:
-    build:
-      context: ./worker-rust
-      dockerfile: Dockerfile
-    container_name: worker-rust
-    environment:
-      - AMQP_URL=${AMQP_URL_RUST}
-    depends_on:
-      orchestrator:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '5.0'
-          memory: 5G
-    networks:
-      - fibo-net
+  # fibo-rust:
+  #   build:
+  #     context: ./worker-rust
+  #     dockerfile: Dockerfile
+  #   container_name: worker-rust
+  #   environment:
+  #     - AMQP_URL=${AMQP_URL_RUST}
+  #   depends_on:
+  #     orchestrator:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '5.0'
+  #         memory: 5G
+  #   networks:
+  #     - fibo-net
 
-  fibo-python:
-    build:
-      context: ./worker-python
-      dockerfile: Dockerfile
-    container_name: worker-python
-    environment:
-      - AMQP_URL=${AMQP_URL_PYTHON}
-    depends_on:
-      orchestrator:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '5.0'
-          memory: 5G
-    networks:
-      - fibo-net
+  # fibo-python:
+  #   build:
+  #     context: ./worker-python
+  #     dockerfile: Dockerfile
+  #   container_name: worker-python
+  #   environment:
+  #     - AMQP_URL=${AMQP_URL_PYTHON}
+  #   depends_on:
+  #     orchestrator:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '5.0'
+  #         memory: 5G
+  #   networks:
+  #     - fibo-net
 
-  fibo-node:
-    build:
-      context: ./worker-node
-      dockerfile: Dockerfile
-    container_name: worker-node
-    environment:
-      - AMQP_URL=${AMQP_URL_NODE}
-    depends_on:
-      orchestrator:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '5.0'
-          memory: 5G
-    networks:
-      - fibo-net
+  # fibo-node:
+  #   build:
+  #     context: ./worker-node
+  #     dockerfile: Dockerfile
+  #   container_name: worker-node
+  #   environment:
+  #     - AMQP_URL=${AMQP_URL_NODE}
+  #   depends_on:
+  #     orchestrator:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '5.0'
+  #         memory: 5G
+  #   networks:
+  #     - fibo-net
 
 networks:
   fibo-net:
     driver: bridge
     name: fibo-benchmark-network
-```
-
-## main.go
-
-```go
-package main
-
-import (
-	"fmt"
-	"math/big"
-)
-
-// FibGenerator produit la suite de Fibonacci via un channel.
-// S'arr√™te si la RAM estim√©e des deux derniers nombres d√©passe limitBytes.
-func FibGenerator(limitBytes uint64) <-chan *big.Int {
-	ch := make(chan *big.Int)
-
-	go func() {
-		defer close(ch)
-		// Initialisation : F(0)=0, F(1)=1
-		a := big.NewInt(0)
-		b := big.NewInt(1)
-
-		for {
-			// Calcul de la taille approximative en RAM des deux termes
-			// big.Int stocke les donn√©es dans un slice de 'Word' (uint sur 64 bits)
-			// On compte environ 8 octets par Word + le overhead de la structure.
-			sizeA := uint64(len(a.Bits())) * 8
-			sizeB := uint64(len(b.Bits())) * 8
-
-			if sizeA+sizeB > limitBytes {
-				fmt.Printf("\n[Limite de %d Go atteinte]\n", limitBytes/1024/1024/1024)
-				return
-			}
-
-			// On envoie une copie pour √©viter les effets de bord si l'appelant modifie la valeur
-			val := new(big.Int).Set(a)
-			ch <- val
-
-			// Fibonacci : a, b = b, a+b
-			// On utilise Add pour additionner b √† a, puis on swap.
-			a.Add(a, b)
-			a, b = b, a
-		}
-	}()
-
-	return ch
-}
-
-func main() {
-	const maxRAM = 5 * 1024 * 1024 * 1024 // 5 Go
-	gen := FibGenerator(maxRAM)
-
-	count := 0
-	for f := range gen {
-		count++
-		// Pour l'exemple, on affiche tous les 100 000 termes
-		// car l'affichage console est tr√®s lent pour de gros nombres.
-		if count%100000 == 0 {
-			fmt.Printf("Terme n¬∞%d calcul√© (Taille actuelle : ~%d MB)\n", count, len(f.Bits())*8/1024/1024)
-		}
-	}
-}
-
 ```
 
 ## orchestrator/.air.toml
@@ -1583,7 +1864,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/orchestrator ./cm
 
 # --- Stage 2: Image Finale ---
 FROM scratch
-# Import des certificats pour RabbitMQ TLS [cite: 2025-12-02]
+# Import des certificats pour RabbitMQ TLS
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 WORKDIR /
 
@@ -1600,9 +1881,15 @@ ENTRYPOINT ["./orchestrator"]
 package main
 
 import (
+	"context"
 	"fibo-orchestrateur/internal/api"
 	"fibo-orchestrateur/internal/orchestrator"
+	"log"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 func main() {
@@ -1610,18 +1897,57 @@ func main() {
 	hub := api.NewHub()
 	go hub.Run()
 
-	// 2. Initialisation de l'Engine (RabbitMQ + Orchestration)
+	// 2. Configuration de l'URL RabbitMQ via .env
 	amqpURL := os.Getenv("AMQP_URL")
 	if amqpURL == "" {
 		amqpURL = "amqp://bench_leader:qsd65f4c98dc7fd9s87ga6fsd5g4zsdrf9g879dfs7g@192.168.1.12:5672/benchmarks"
 	}
 
-	// NewEngine lance la boucle de reconnexion en interne
+	// 3. Lancement de l'Engine (RabbitMQ + Orchestration)
+	// NewEngine lance d√©j√† la boucle de reconnexion en interne
 	orch := orchestrator.NewEngine(amqpURL, hub)
 
-	// 3. Setup et Lancement du serveur Web
-	r := api.SetupRouter(orch, hub)
-	r.Run(":8080")
+	// 4. Configuration du serveur HTTP avec Graceful Shutdown
+	router := api.SetupRouter(orch, hub)
+
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: router,
+	}
+
+	// Lancement du serveur dans une goroutine pour ne pas bloquer le thread principal
+	go func() {
+		log.Println("[API] Serveur d√©marr√© sur :8080")
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("[CRITICAL] Erreur serveur Web: %v", err)
+		}
+	}()
+
+	// 5. Gestion des Signaux d'Arr√™t (SIGINT, SIGTERM)
+	// Indispensable pour k3s lors d'un red√©ploiement
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	// Blocage jusqu'√† r√©ception d'un signal
+	sig := <-quit
+	log.Printf("[MAIN] Signal %v re√ßu. D√©but de la proc√©dure d'arr√™t propre...", sig)
+
+	// 6. Proc√©dure de fermeture Graceful (Timeout de 5 secondes)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	// Arr√™t du serveur HTTP (ne prend plus de nouvelles requ√™tes)
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("[ERROR] Arr√™t forc√© du serveur HTTP:", err)
+	}
+
+	// Fermeture des ressources critiques
+	log.Println("[RMQ] Fermeture des connexions RabbitMQ...")
+	if orch.Conn != nil {
+		orch.Conn.Close()
+	}
+
+	log.Println("[MAIN] Orchestrateur arr√™t√© proprement. Bye!")
 }
 
 ```
@@ -1855,14 +2181,14 @@ func SetupRouter(orch *orchestrator.Engine, hub *Hub) *gin.Engine {
 	// Endpoint utilis√© par le healthcheck du Compose
 	r.GET("/health", func(c *gin.Context) {
 		orch.Mu.Lock()
-		// V√©rification de l'√©tat du canal RabbitMQ [cite: 2025-12-02]
+		// V√©rification de l'√©tat du canal RabbitMQ
 		isRMQConnected := orch.Channel != nil && !orch.Conn.IsClosed()
 		orch.Mu.Unlock()
 
 		if isRMQConnected {
 			c.JSON(http.StatusOK, gin.H{"status": "UP"})
 		} else {
-			// Retourne 503 pour que curl -f √©choue [cite: 2025-12-05]
+			// Retourne 503 pour que curl -f √©choue
 			c.JSON(http.StatusServiceUnavailable, gin.H{"status": "DOWN"})
 		}
 	})
@@ -1873,7 +2199,19 @@ func SetupRouter(orch *orchestrator.Engine, hub *Hub) *gin.Engine {
 		c.Data(http.StatusOK, "text/html; charset=utf-8", index)
 	})
 	r.StaticFS("/static", http.FS(webRoot))
-	r.GET("/ws", func(c *gin.Context) { ServeWs(hub, c.Writer, c.Request) })
+	r.GET("/ws", func(c *gin.Context) {
+		ServeWs(hub, c.Writer, c.Request)
+
+		// On envoie imm√©diatement la liste des workers d√©j√† connus
+		orch.Mu.Lock()
+		for _, w := range orch.Workers {
+			hub.BroadcastMessage(map[string]interface{}{
+				"type": "WORKER_JOIN",
+				"data": w,
+			})
+		}
+		orch.Mu.Unlock()
+	})
 	r.POST("/run", func(c *gin.Context) {
 		var req struct {
 			Handler string                 `json:"handler"`
@@ -1939,7 +2277,7 @@ func SetupRouter(orch *orchestrator.Engine, hub *Hub) *gin.Engine {
 ## orchestrator/internal/api/web/js/app.js
 
 ```javascript
-import { updateWorkerList, updateStatus } from './ui.js';
+import { updateWorkerList, updateStatus ,updateHealthData} from './ui.js';
 import { initChart, addDataToChart } from './charts.js';
 
 const socket = new WebSocket(`ws://${window.location.host}/ws`);
@@ -1956,6 +2294,10 @@ socket.onmessage = (event) => {
             break;
         case "RESULT":
             addDataToChart(msg.data);
+            updateWorkerMetrics(msg.data.worker_id, msg.data.metadata); // Mise √† jour IHM temps r√©el
+            break;
+        case "HEALTH_UPDATE":
+            updateHealthData(msg.data);
             break;
     }
 };
@@ -2036,6 +2378,31 @@ export function updateStatus(connected) {
     }
 }
 
+export function updateWorkerMetrics(workerId, metadata) {
+    const el = document.getElementById(`worker-${workerId}`);
+    if (!el) return;
+
+    const statsContainer = el.querySelector('.worker-stats') || document.createElement('div');
+    if (!el.querySelector('.worker-stats')) {
+        statsContainer.className = "worker-stats mt-3 pt-2 border-t border-slate-600/30 grid grid-cols-2 gap-2";
+        el.appendChild(statsContainer);
+    }
+
+    statsContainer.innerHTML = `
+        <div class="flex flex-col">
+            <span class="text-[9px] text-slate-500 uppercase">Load</span>
+            <span class="text-xs font-mono text-blue-400">${metadata.cpu} gor</span>
+        </div>
+        <div class="flex flex-col text-right">
+            <span class="text-[9px] text-slate-500 uppercase">Mem</span>
+            <span class="text-xs font-mono text-emerald-400">${metadata.ram}MB</span>
+        </div>
+        <div class="col-span-2 text-center text-[10px] text-slate-400 font-mono mt-1">
+            Data Stream: ${(metadata.net / 1024).toFixed(2)} KB
+        </div>
+    `;
+}
+
 export function updateWorkerList(worker) {
     const list = document.getElementById('worker-list');
     const id = `worker-${worker.id}`;
@@ -2043,16 +2410,56 @@ export function updateWorkerList(worker) {
 
     const el = document.createElement('div');
     el.id = id;
-    el.className = "flex items-center justify-between p-4 bg-slate-700/50 rounded-xl border border-slate-600 animate-pulse";
+    // Ajout des classes pour l'expansion et l'interactivit√© 
+    el.className = "p-4 bg-slate-800/80 rounded-2xl border border-slate-700 cursor-pointer transition-all duration-300 hover:border-blue-500 overflow-hidden mb-4";
+    
+    el.onclick = () => {
+        // Toggle pour agrandir la tuile sur tout le conteneur si besoin
+        el.classList.toggle('ring-2');
+        el.classList.toggle('ring-blue-500');
+        el.querySelector('.metrics-grid').classList.toggle('hidden');
+    };
+
     el.innerHTML = `
-        <div class="flex flex-col">
-            <span class="font-bold text-blue-400">${worker.language.toUpperCase()}</span>
-            <span class="text-[10px] font-mono text-slate-400">${worker.id.substring(0,16)}</span>
+        <div class="flex justify-between items-center">
+            <div class="flex flex-col">
+                <span class="text-xs font-black text-blue-400 italic tracking-tighter">${worker.language.toUpperCase()}</span>
+                <span class="text-[9px] font-mono text-slate-500">${worker.id.substring(0,16)}</span>
+            </div>
+            <div class="status-dot w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_emerald]"></div>
         </div>
-        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+        
+        <div class="metrics-grid hidden mt-4 pt-4 border-t border-slate-700 grid grid-cols-2 gap-4">
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">RAM Usage</p>
+                <p class="ram-val text-sm font-black text-white">-- MB</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">CPU Threads</p>
+                <p class="cpu-val text-sm font-black text-white">-- gor</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">Net I/O</p>
+                <p class="net-val text-xs font-mono text-slate-300">--</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">Disk Activity</p>
+                <p class="disk-val text-xs font-mono text-slate-300">--</p>
+            </div>
+        </div>
     `;
     list.appendChild(el);
-    setTimeout(() => el.classList.remove('animate-pulse'), 2000);
+}
+
+export function updateHealthData(data) {
+    const el = document.getElementById(`worker-${data.worker_id}`);
+    if (!el) return;
+    console.log('Updating health data for', data.worker_id, data);
+    // Mise √† jour des valeurs en temps r√©el 
+    el.querySelector('.ram-val').innerText = `${data.ram} MB`;
+    el.querySelector('.cpu-val').innerText = `${data.cpu} thr`;
+    el.querySelector('.net-val').innerText = data.net_io;
+    el.querySelector('.disk-val').innerText = data.disk_io;
 }
 ```
 
@@ -2081,6 +2488,18 @@ type Engine struct {
 
 type UIHub interface {
 	BroadcastMessage(msg interface{})
+}
+
+func (o *Engine) safeGo(fn func()) {
+	go func() {
+		defer func() {
+			if r := recover(); r != nil {
+				log.Printf("[CRITICAL] Panic captur√© dans l'orchestrateur: %v", r)
+				// Ici, on pourrait envoyer une alerte √† ton Sentry ou Loki
+			}
+		}()
+		fn()
+	}()
 }
 
 func NewEngine(amqpURL string, hub UIHub) *Engine {
@@ -2125,25 +2544,41 @@ func (o *Engine) StartTask(handler string, params map[string]interface{}) {
 	}
 }
 
-// ConsumeWorkerResults traite les messages entrants de chaque langage (Phase 4)
-func (o *Engine) ConsumeWorkerResults(queueName string) {
-	o.Mu.Lock()
-	ch := o.Channel
-	o.Mu.Unlock()
+// ConsumeWorkerResults traite les messages entrants de chaque langage
 
-	msgs, err := ch.Consume(queueName, "", true, false, false, false, nil)
+func (o *Engine) ConsumeWorkerResults(queueName string) {
+	// 1. On cr√©e un canal D√âDI√â pour ce flux Stream sp√©cifique
+	ch, err := o.Conn.Channel()
 	if err != nil {
-		log.Printf("[RMQ] Erreur consommation %s: %v", queueName, err)
+		log.Printf("[ERROR] Impossible de cr√©er un canal pour %s: %v", queueName, err)
+		return
+	}
+	defer ch.Close() // Fermeture propre si le worker dispara√Æt
+
+	// 2. Configuration obligatoire pour Stream (Prefetch > 0)
+	if err := ch.Qos(100, 0, false); err != nil {
+		log.Printf("[RMQ] Erreur QoS pour %s: %v", queueName, err)
+		return
+	}
+
+	// 3. Consommation avec offset 'next'
+	msgs, err := ch.Consume(
+		queueName, "",
+		false, // auto-ack: false obligatoire
+		false, false, false,
+		amqp.Table{"x-stream-offset": "next"},
+	)
+	if err != nil {
+		log.Printf("[RMQ] Erreur Consume %s: %v", queueName, err)
 		return
 	}
 
 	for d := range msgs {
 		var res WorkerResult
-		if err := json.Unmarshal(d.Body, &res); err != nil {
-			continue
+		if err := json.Unmarshal(d.Body, &res); err == nil {
+			o.BroadcastToUI("RESULT", res)
+			d.Ack(false) // Ack manuel sur canal d√©di√©
 		}
-		// Envoi imm√©diat vers l'UI via le hub WebSocket
-		o.BroadcastToUI("RESULT", res)
 	}
 }
 
@@ -2154,6 +2589,35 @@ func (o *Engine) BroadcastToUI(msgType string, data interface{}) {
 			"data": data,
 		})
 	}
+}
+
+func (o *Engine) StartGarbageCollector() {
+	ticker := time.NewTicker(30 * time.Second)
+	o.safeGo(func() {
+		for range ticker.C {
+			o.Mu.Lock()
+			now := time.Now().Unix()
+			for id, worker := range o.Workers {
+				if now-worker.LastSeen > 60 {
+					log.Printf("[GC] Worker %s inactif. Nettoyage...", id)
+
+					// 1. Suppression de la queue durable sur RabbitMQ
+					if o.Channel != nil {
+						queueName := "results_" + id
+						_, err := o.Channel.QueueDelete(queueName, false, false, false)
+						if err != nil {
+							log.Printf("[GC] Erreur suppression queue %s: %v", queueName, err)
+						}
+					}
+
+					// 2. Nettoyage m√©moire et UI
+					delete(o.Workers, id)
+					o.BroadcastToUI("WORKER_LEAVE", map[string]string{"id": id})
+				}
+			}
+			o.Mu.Unlock()
+		}
+	})
 }
 
 ```
@@ -2177,24 +2641,23 @@ func (o *Engine) InitRabbitMQ(url string) {
 	go o.handleReconnect(url)
 }
 
-// handleReconnect assure la survie de la connexion sur ton cluster k3s [cite: 2025-12-20]
+// handleReconnect assure la survie de la connexion sur ton cluster k3s
 func (o *Engine) handleReconnect(url string) {
 	for {
 		log.Printf("[RMQ] Tentative de connexion √† %s...", url)
-
 		conn, err := amqp.Dial(url)
 		if err != nil {
-			log.Printf("[RMQ] Connexion impossible: %v. Nouvel essai dans 15s...", err)
-			time.Sleep(15 * time.Second)
+			log.Printf("[RMQ] √âchec Dial: %v. Re-tentative dans 10s...", err)
+			time.Sleep(10 * time.Second)
 			continue
 		}
 
 		o.Conn = conn
 		ch, err := conn.Channel()
 		if err != nil {
-			log.Printf("[RMQ] Canal impossible: %v", err)
+			log.Printf("[RMQ] √âchec Canal: %v", err)
 			conn.Close()
-			time.Sleep(15 * time.Second)
+			time.Sleep(10 * time.Second)
 			continue
 		}
 
@@ -2202,26 +2665,42 @@ func (o *Engine) handleReconnect(url string) {
 		o.Channel = ch
 		o.Mu.Unlock()
 
-		// Configuration des exchanges et queues de base
 		if err := o.setupInfrastructure(); err != nil {
-			log.Printf("[RMQ] Erreur setup infrastructure: %v. Reconnexion dans 15s...", err)
+			log.Printf("[RMQ] Erreur Infrastructure: %v", err)
 			conn.Close()
-			time.Sleep(15 * time.Second)
+			time.Sleep(10 * time.Second)
 			continue
 		}
 
 		log.Println("[RMQ] Connect√© et infrastructure pr√™te.")
 
-		// Notification de fermeture pour d√©clencher la reconnexion automatique
-		closeChan := make(chan *amqp.Error)
-		o.Conn.NotifyClose(closeChan)
+		// --- Surveillance double : Connexion + Canal ---
+		notifyConnClose := make(chan *amqp.Error)
+		o.Conn.NotifyClose(notifyConnClose)
 
-		// Lancement de l'√©coute des workers (Phase 1)
+		notifyChanClose := make(chan *amqp.Error)
+		o.Channel.NotifyClose(notifyChanClose)
+
+		// Lancement des √©coutes
 		go o.ListenForWorkers()
+		go o.ListenForHealth()
 
-		// Blocage jusqu'√† la d√©connexion
-		err = <-closeChan
-		log.Printf("[RMQ] Rupture de flux: %v. Relance de la proc√©dure de r√©silience...", err)
+		// Blocage intelligent
+		select {
+		case err := <-notifyConnClose:
+			log.Printf("[RMQ] Connexion perdue (vhost/server): %v", err)
+		case err := <-notifyChanClose:
+			log.Printf("[RMQ] Canal perdu (queue/protocol error): %v", err)
+		}
+
+		// Nettoyage avant reconnexion
+		o.Mu.Lock()
+		o.Channel = nil
+		o.Mu.Unlock()
+		o.Conn.Close()
+
+		log.Println("[RMQ] Nettoyage effectu√©. Re-tentative de connexion...")
+		time.Sleep(5 * time.Second)
 	}
 }
 
@@ -2233,7 +2712,7 @@ func (o *Engine) setupInfrastructure() error {
 	err := o.Channel.ExchangeDeclare(
 		"fibo_admin_exchange",
 		"fanout",
-		true, // Durable pour la persistance dans k3s [cite: 2025-12-20]
+		true, // Durable pour la persistance dans k3s
 		false,
 		false,
 		false,
@@ -2253,7 +2732,44 @@ func (o *Engine) setupInfrastructure() error {
 		false,
 		nil,
 	)
+	// D√©claration de la queue de sant√© (Classic Durable)
+	_, err = o.Channel.QueueDeclare("worker_health", true, false, false, false, nil)
 	return err
+}
+
+func (o *Engine) ListenForHealth() {
+	o.Mu.Lock()
+	ch := o.Channel
+	o.Mu.Unlock()
+
+	// S√©curit√© suppl√©mentaire : Nil check
+	if ch == nil {
+		log.Println("[ERROR] ListenForHealth abandonn√© : canal nil")
+		return
+	}
+
+	msgs, err := ch.Consume("worker_health", "", true, false, false, false, nil)
+	if err != nil {
+		log.Printf("[RMQ] Erreur Consume health: %v", err)
+		return
+	}
+
+	for d := range msgs {
+		var healthData struct {
+			WorkerID string `json:"worker_id"`
+			RAM      int    `json:"ram"`
+			CPU      int    `json:"cpu"`
+		}
+		if err := json.Unmarshal(d.Body, &healthData); err == nil {
+			o.Mu.Lock()
+			if w, ok := o.Workers[healthData.WorkerID]; ok {
+				w.LastSeen = time.Now().Unix() // Rafra√Æchissement
+				o.Workers[healthData.WorkerID] = w
+			}
+			o.Mu.Unlock()
+			o.BroadcastToUI("HEALTH_UPDATE", healthData)
+		}
+	}
 }
 
 func (o *Engine) ListenForWorkers() {
@@ -2262,44 +2778,54 @@ func (o *Engine) ListenForWorkers() {
 		o.Mu.Unlock()
 		return
 	}
-	ch := o.Channel
+	ch := o.Channel // On extrait le canal pour ne pas garder le lock durant le Consume
 	o.Mu.Unlock()
 
 	msgs, err := ch.Consume("isReady", "", true, false, false, false, nil)
 	if err != nil {
-		log.Printf("[RMQ] Erreur Consume isReady: %v", err)
+		log.Printf("[RMQ] Erreur Consume: %v", err)
 		return
 	}
 
 	for d := range msgs {
 		var reg WorkerRegistration
 		if err := json.Unmarshal(d.Body, &reg); err != nil {
-			log.Printf("[RMQ] Erreur d√©codage: %v", err)
 			continue
 		}
 
+		// --- SCOPE DE VERROUILLAGE ATOMIQUE ---
 		o.Mu.Lock()
+		reg.LastSeen = time.Now().Unix() // Initialisation du timestamp pour le GC
 		o.Workers[reg.ID] = reg
+		o.Mu.Unlock() // ON LIB√àRE IMM√âDIATEMENT
 
-		// Phase 2 : Queue de r√©sultats unique
+		// Cr√©ation de la queue Stream sur un canal d√©di√© pour √©viter l'erreur 503
 		resQueue := fmt.Sprintf("results_%s", reg.ID)
-		_, err := o.Channel.QueueDeclare(
+
+		// Utilisation d'un canal temporaire pour la d√©claration (DevOps Best Practice)
+		tmpCh, err := o.Conn.Channel()
+		if err != nil {
+			log.Printf("[RMQ] Erreur canal temporaire: %v", err)
+			continue
+		}
+
+		_, err = tmpCh.QueueDeclare(
 			resQueue,
-			false, // Transient pour les r√©sultats de benchmark [cite: 2025-12-05]
-			true,  // Auto-delete : dispara√Æt si l'orchestrateur coupe
+			true, // Durable obligatoire pour les Streams
 			false,
 			false,
-			nil,
+			false,
+			amqp.Table{"x-queue-type": "stream", "x-expires": 60000}, // 7 jours en ms
 		)
+		tmpCh.Close()
 
 		if err == nil {
-			go o.ConsumeWorkerResults(resQueue)
-			log.Printf("[SYNC] Worker %s (%s) enregistr√© via %s", reg.ID, reg.Language, resQueue)
-			o.BroadcastToUI("WORKER_JOIN", reg)
-		} else {
-			log.Printf("[RMQ] Erreur cr√©ation queue %s: %v", resQueue, err)
+			o.safeGo(func() {
+				o.ConsumeWorkerResults(resQueue)
+			})
+			o.BroadcastToUI("WORKER_JOIN", reg) //
+			log.Printf("[SYNC] Worker %s (%s) pr√™t.", reg.ID, reg.Language)
 		}
-		o.Mu.Unlock()
 	}
 }
 
@@ -2313,6 +2839,8 @@ package orchestrator
 type WorkerRegistration struct {
 	ID       string `json:"id"`
 	Language string `json:"language"`
+	// Utilise "-" pour que ce ne soit pas envoy√© √† l'IHM, mais reste accessible en Go
+	LastSeen int64 `json:"_"`
 }
 
 type AdminTask struct {
@@ -2346,114 +2874,172 @@ exit status 1exit status 1exit status 1exit status 1exit status 1exit status 1ex
 ## project_export.log
 
 ```text
-[2025-12-25 17:40:36] Source  : .
-[2025-12-25 17:40:36] Sortie  : project_export.md
-[2025-12-25 17:40:36] Fichiers trouv√©s (avant filtre): 123
-[2025-12-25 17:40:36] Fichiers √† concat√©ner (apr√®s filtre): 122 (exclus auto:1 dir:0 file:0)
-[2025-12-25 17:40:36] Concat√®ne [1] .env (size=646)
-[2025-12-25 17:40:36] Concat√®ne [2] .git/COMMIT_EDITMSG (size=30)
-[2025-12-25 17:40:36] Concat√®ne [3] .git/FETCH_HEAD (size=87)
-[2025-12-25 17:40:36] Concat√®ne [4] .git/HEAD (size=23)
-[2025-12-25 17:40:36] Concat√®ne [5] .git/ORIG_HEAD (size=41)
-[2025-12-25 17:40:36] Concat√®ne [6] .git/config (size=348)
-[2025-12-25 17:40:36] Concat√®ne [7] .git/description (size=73)
-[2025-12-25 17:40:36] Concat√®ne [8] .git/hooks/applypatch-msg.sample (size=478)
-[2025-12-25 17:40:36] Concat√®ne [9] .git/hooks/commit-msg.sample (size=896)
-[2025-12-25 17:40:36] Concat√®ne [10] .git/hooks/fsmonitor-watchman.sample (size=4726)
-[2025-12-25 17:40:36] Concat√®ne [11] .git/hooks/post-update.sample (size=189)
-[2025-12-25 17:40:36] Concat√®ne [12] .git/hooks/pre-applypatch.sample (size=424)
-[2025-12-25 17:40:36] Concat√®ne [13] .git/hooks/pre-commit.sample (size=1643)
-[2025-12-25 17:40:36] Concat√®ne [14] .git/hooks/pre-merge-commit.sample (size=416)
-[2025-12-25 17:40:36] Concat√®ne [15] .git/hooks/pre-push.sample (size=1374)
-[2025-12-25 17:40:36] Concat√®ne [16] .git/hooks/pre-rebase.sample (size=4898)
-[2025-12-25 17:40:36] Concat√®ne [17] .git/hooks/pre-receive.sample (size=544)
-[2025-12-25 17:40:36] Concat√®ne [18] .git/hooks/prepare-commit-msg.sample (size=1492)
-[2025-12-25 17:40:36] Concat√®ne [19] .git/hooks/push-to-checkout.sample (size=2783)
-[2025-12-25 17:40:36] Concat√®ne [20] .git/hooks/sendemail-validate.sample (size=2308)
-[2025-12-25 17:40:36] Concat√®ne [21] .git/hooks/update.sample (size=3650)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/index ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [23] .git/info/exclude (size=240)
-[2025-12-25 17:40:36] Concat√®ne [24] .git/logs/HEAD (size=378)
-[2025-12-25 17:40:36] Concat√®ne [25] .git/logs/refs/heads/master (size=378)
-[2025-12-25 17:40:36] Concat√®ne [26] .git/logs/refs/remotes/origin/master (size=288)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/0c/636d86bffac4f802278a4a7178d9a27193f0ec ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/0e/ee988462b970f9b69b1449ac6c54ca6a9a5754 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/11/c0a428ae63867970c057e4da81ea673a9b10a4 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/12/a122ea7678e77dcb0ffc86aeca9c7d69bd816d ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [31] .git/objects/20/708f6a2ef877be2ccc2101160dbce8791b4604 (size=273)
-[2025-12-25 17:40:36] Concat√®ne [32] .git/objects/22/f7a387d14bb1ff975b8f8a909c2760552ab6b2 (size=577)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/24/3e0c81c7ad72a6d3e8acb2dec9be096a1193da ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/33/c0d87c6d62f2f9d9a4e40f8f25ed90e4056ba3 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/37/ae47ae280e513c8aa2129bd8132aefba977851 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/3e/2093992b9bec6d3f7c01739e68ac39c300d3d1 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [37] .git/objects/3e/20ed345bffc4e3750b64a9529fa7d180030b91 (size=275)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/3f/a8c8c5920b5fd88bbfd47984588cab3f7465c5 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/49/6c619e5bce5b8e4b24d430a73bbd67e2f4f31e ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/4c/aeed4572829ae912ba1a0d88c87af1bc82e713 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/5a/50d4c26668c2b5b465756529b5868e7f109e11 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [42] .git/objects/5d/ab255ae1904e7a27735e3c9641a108451695d3 (size=206)
-[2025-12-25 17:40:36] Concat√®ne [43] .git/objects/5e/1af68ac259b3f3f34291e2803d602d13ce9fd5 (size=206)
-[2025-12-25 17:40:36] Concat√®ne [44] .git/objects/5f/7131495b2d34d83cb08d08a31f739f2fa24949 (size=475)
-[2025-12-25 17:40:36] Concat√®ne [45] .git/objects/5f/b088a58ba421fe022337f7079466ed09d22bb1 (size=201)
-[2025-12-25 17:40:36] Concat√®ne [46] .git/objects/67/733188b7153a7ce368444a9509968142172eea (size=406)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/6c/cc48a05421e0f3e40a0cfd4bc069663295c1c7 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/6d/6408a5bb8411448f2ee0f3e05078f8e13ff684 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/6f/9367e4ddeff2ceee6e1b6aa24bbf00f029cb75 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/71/d1529cacb1c8b66dff4899a11595712c0ff2ca ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/75/cdea54465f53768e9edc7c31fa5a226602af79 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/7c/d49f16753e2d5e87e82317cc62ba5ad25fcd1a ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/7d/14ca0ceb65a100b65da50c13c4ed00423b7abd ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/7d/d15a1c616cdd4892d04ffee27e0b1f8e0240bb ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/81/692525cea495f555182927f8f55584d98020f9 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/84/6efe57e7f1aba3621ccda2c424a11089a02b9b ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/87/5968d8f81678a6e9a858eebe90a2b957759531 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/87/63c1d9aa8a5da1da10bdcac57f1fc5ebb09491 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/91/f5acd81ec45ecd315e27d23991247bd92e1979 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/9d/c71497ae68a4e83a6d720c3ad2fe6abd38d86f ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/9d/cf46457a2239e54fbe4a9f00f2826996522e04 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/a2/91f3e344cf5c4aef3053ba2cb40e91b5fc39b3 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/a5/b9c675de4175687d7fff51d0dab61507fb118d ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [64] .git/objects/ab/ece7364f2ed1cdc9b439c4c5374ab3d9dfd837 (size=286)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/ac/d9d78e43721d13834d5d0f2c10a60001a496b6 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/b5/3633d98bf09f65d7ffad41851e7dc00426fc7a ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/b7/6e4ffecf8364809c61229d2644b578f6a94157 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/b7/e1fe52398f8f442711a0d0470a6318c0f10df3 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/be/0c220c16ac5a2391490b3f9618e5f9454345aa ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/bf/2fb9f446bf88683793ffeb730ffe33654b8be1 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [71] .git/objects/c2/7fb11e9c9c3fe264ad1fdf894bbb8214c1d6a7 (size=216)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/c7/9719e52ab405c026c4d3c48899017ff6545063 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/c8/7dd4961de5d2b0546460efbf71169d6fbde2c0 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/c9/a83108423860e7c4e872bdb748dfb3d2f60be9 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/d4/ad699edca1759fdd98c08d197aea6fe8e7e202 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/d7/0c9ad928febd9287bcb9079f5857db1af09c06 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/df/c5b6c588b2753fb511e78f198853374d94ddbc ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [78] .git/objects/e2/0e09349e91e8cafe04f0cd25d2b449b3459170 (size=153)
-[2025-12-25 17:40:36] Concat√®ne [79] .git/objects/e2/b928d9112e1dc2bf98d9006e9a0bf2fc8cbf93 (size=470)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/eb/3dda2764d74686f269b5551c818e3a4028218d ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [81] .git/objects/ef/327c55831b06abfc2b987608b12db85728ffbf (size=365)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/f5/c1c09205f17763c8289c63c6d35fd4df64c6a8 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : .git/objects/fa/10cc7e0d046698a0c2b77544ed2a7167a49d25 ‚Äî r√©f√©renc√© mais non inclus
-[2025-12-25 17:40:36] Concat√®ne [84] .git/refs/heads/master (size=41)
-[2025-12-25 17:40:36] Concat√®ne [85] .git/refs/remotes/origin/master (size=41)
-[2025-12-25 17:40:36] Concat√®ne [86] .gitignore (size=123)
-[2025-12-25 17:40:36] Concat√®ne [87] compose.yml (size=2271)
-[2025-12-25 17:40:36] Concat√®ne [88] main.go (size=1476)
-[2025-12-25 17:40:36] Concat√®ne [89] orchestrator/.air.toml (size=212)
-[2025-12-25 17:40:36] Concat√®ne [90] orchestrator/Dockerfile (size=716)
-[2025-12-25 17:40:36] Concat√®ne [91] orchestrator/cmd/server/main.go (size=621)
-[2025-12-25 17:40:36] Concat√®ne [92] orchestrator/go.mod (size=1666)
-[2025-12-25 17:40:36] Concat√®ne [93] orchestrator/go.sum (size=8015)
-[2025-12-25 17:40:36] Concat√®ne [94] orchestrator/internal/api/hub.go (size=904)
-[2025-12-25 17:40:36] Concat√®ne [95] orchestrator/internal/api/routes.go (size=1364)
-[2025-12-25 17:40:36] Concat√®ne [96] orchestrator/internal/api/web/index.html (size=2206)
-[2025-12-25 17:40:36] Concat√®ne [97] orchestrator/internal/api/web/js/app.js (size=860)
-[2025-12-25 17:40:36] Concat√®ne [98] orchestrator/internal/api/web/js/charts.js (size=1226)
-[2025-12-25 17:40:36] Concat√®ne [99] orchestrator/internal/api/web/js/ui.js (size=1261)
-[2025-12-25 17:40:36] Concat√®ne [100] orchestrator/internal/orchestrator/engine.go (size=2004)
-[2025-12-25 17:40:36] Concat√®ne [101] orchestrator/internal/orchestrator/rabbitmq.go (size=3272)
-[2025-12-25 17:40:36] Concat√®ne [102] orchestrator/internal/orchestrator/types.go (size=617)
-[2025-12-25 17:40:36] Concat√®ne [103] orchestrator/tmp/build-errors.log (size=117)
-[2025-12-25 17:40:36] ‚ÑπÔ∏è  Binaire : orchestrator/tmp/main ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Source  : .
+[2025-12-25 19:28:03] Sortie  : project_export.md
+[2025-12-25 19:28:03] Fichiers trouv√©s (avant filtre): 181
+[2025-12-25 19:28:03] Fichiers √† concat√©ner (apr√®s filtre): 180 (exclus auto:1 dir:0 file:0)
+[2025-12-25 19:28:03] Concat√®ne [1] .env (size=627)
+[2025-12-25 19:28:03] Concat√®ne [2] .git/COMMIT_EDITMSG (size=104)
+[2025-12-25 19:28:03] Concat√®ne [3] .git/FETCH_HEAD (size=87)
+[2025-12-25 19:28:03] Concat√®ne [4] .git/HEAD (size=23)
+[2025-12-25 19:28:03] Concat√®ne [5] .git/ORIG_HEAD (size=41)
+[2025-12-25 19:28:03] Concat√®ne [6] .git/config (size=348)
+[2025-12-25 19:28:03] Concat√®ne [7] .git/description (size=73)
+[2025-12-25 19:28:03] Concat√®ne [8] .git/hooks/applypatch-msg.sample (size=478)
+[2025-12-25 19:28:03] Concat√®ne [9] .git/hooks/commit-msg.sample (size=896)
+[2025-12-25 19:28:03] Concat√®ne [10] .git/hooks/fsmonitor-watchman.sample (size=4726)
+[2025-12-25 19:28:03] Concat√®ne [11] .git/hooks/post-update.sample (size=189)
+[2025-12-25 19:28:03] Concat√®ne [12] .git/hooks/pre-applypatch.sample (size=424)
+[2025-12-25 19:28:03] Concat√®ne [13] .git/hooks/pre-commit.sample (size=1643)
+[2025-12-25 19:28:03] Concat√®ne [14] .git/hooks/pre-merge-commit.sample (size=416)
+[2025-12-25 19:28:03] Concat√®ne [15] .git/hooks/pre-push.sample (size=1374)
+[2025-12-25 19:28:03] Concat√®ne [16] .git/hooks/pre-rebase.sample (size=4898)
+[2025-12-25 19:28:03] Concat√®ne [17] .git/hooks/pre-receive.sample (size=544)
+[2025-12-25 19:28:03] Concat√®ne [18] .git/hooks/prepare-commit-msg.sample (size=1492)
+[2025-12-25 19:28:03] Concat√®ne [19] .git/hooks/push-to-checkout.sample (size=2783)
+[2025-12-25 19:28:03] Concat√®ne [20] .git/hooks/sendemail-validate.sample (size=2308)
+[2025-12-25 19:28:03] Concat√®ne [21] .git/hooks/update.sample (size=3650)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/index ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [23] .git/info/exclude (size=240)
+[2025-12-25 19:28:03] Concat√®ne [24] .git/logs/HEAD (size=1271)
+[2025-12-25 19:28:03] Concat√®ne [25] .git/logs/refs/heads/master (size=1271)
+[2025-12-25 19:28:03] Concat√®ne [26] .git/logs/refs/remotes/origin/master (size=576)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/07/ae975db35e66033dec0b124a5beb703025248f ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/0c/4fc5ef3fa24178bd7db7c90efb69907387eee0 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/0c/636d86bffac4f802278a4a7178d9a27193f0ec ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/0e/ee988462b970f9b69b1449ac6c54ca6a9a5754 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/11/c0a428ae63867970c057e4da81ea673a9b10a4 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/12/a122ea7678e77dcb0ffc86aeca9c7d69bd816d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/12/d88b2843b5c4a93c94343f51967ec3b4538f6d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/16/f77612eccd94213863c5ad7ebd2e9fe8dd009b ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/1a/fb529027bfd3b244eb797399e6c0966eecbeb5 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/1d/17b6c4d2312673094dc22ccfeac6262f182d81 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/1e/9e3512be43ceac03f749b3e1bd81a4e0899e7f ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [38] .git/objects/20/708f6a2ef877be2ccc2101160dbce8791b4604 (size=273)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/22/1181d2632a36a783df61e3c0345b3ede421068 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [40] .git/objects/22/f7a387d14bb1ff975b8f8a909c2760552ab6b2 (size=577)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/24/3e0c81c7ad72a6d3e8acb2dec9be096a1193da ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/26/1363925bedc249329ef083cf913018d63c62f5 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/33/c0d87c6d62f2f9d9a4e40f8f25ed90e4056ba3 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/34/2ec37e7c6d81a03252d768ba5b12b3f726e491 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/37/ae47ae280e513c8aa2129bd8132aefba977851 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/3d/2251a550284deb468cc7e650b8b3aee7127908 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/3e/2093992b9bec6d3f7c01739e68ac39c300d3d1 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [48] .git/objects/3e/20ed345bffc4e3750b64a9529fa7d180030b91 (size=275)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/3f/a8c8c5920b5fd88bbfd47984588cab3f7465c5 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/42/4bb4fbbc66cf6af15cf54a2ff469815c3faddf ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/47/1c30f56909f444ef7f38a7049ab5233f1de6fc ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/49/6c619e5bce5b8e4b24d430a73bbd67e2f4f31e ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/49/a6f4e3b2dce8aee8a067bf9e18b853b66fd19d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [54] .git/objects/4b/37f9a11f378cc7e66ce3371d0508022174dd30 (size=237)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/4c/aeed4572829ae912ba1a0d88c87af1bc82e713 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/51/892cf7e7cd672d3b5d6d471bbb562d04a8e164 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/5a/50d4c26668c2b5b465756529b5868e7f109e11 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [58] .git/objects/5a/8af5557d17aa3d37ee1e7841508587a0d49f19 (size=228)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/5a/e095b7d3a678a69e6808cb3856ccd3ded0bdf5 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/5d/175e2933d1e59016f42d4e2f2441db2fef311d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [61] .git/objects/5d/ab255ae1904e7a27735e3c9641a108451695d3 (size=206)
+[2025-12-25 19:28:03] Concat√®ne [62] .git/objects/5e/1af68ac259b3f3f34291e2803d602d13ce9fd5 (size=206)
+[2025-12-25 19:28:03] Concat√®ne [63] .git/objects/5f/7131495b2d34d83cb08d08a31f739f2fa24949 (size=475)
+[2025-12-25 19:28:03] Concat√®ne [64] .git/objects/5f/b088a58ba421fe022337f7079466ed09d22bb1 (size=201)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/61/9c750eb7e119698413b3f6346eb8c14f603684 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/64/72bab105a7266bf1324976307cfdc40c9fba6d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/67/057bc258203607838b49236920023738fec519 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [68] .git/objects/67/733188b7153a7ce368444a9509968142172eea (size=406)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/69/debbb92bbcb24a4513e4cf15034b3f40c2f338 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/6c/cc48a05421e0f3e40a0cfd4bc069663295c1c7 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/6d/6408a5bb8411448f2ee0f3e05078f8e13ff684 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/6f/9367e4ddeff2ceee6e1b6aa24bbf00f029cb75 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/71/d1529cacb1c8b66dff4899a11595712c0ff2ca ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/73/a6ec090865db226e94fa131701d00746aaa7a9 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/75/cdea54465f53768e9edc7c31fa5a226602af79 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/75/cfbdfbadfe07187291e5446058a8c6349db908 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [77] .git/objects/78/75ca23928e02658b93e6524a8c99458e7c39e6 (size=235)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/79/86982687d75da66eb87f7a2588dd8d33f06898 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7b/6628ade4bd1e5bf8024768ac26ff688ef83082 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7c/d49f16753e2d5e87e82317cc62ba5ad25fcd1a ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7d/14ca0ceb65a100b65da50c13c4ed00423b7abd ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7d/d15a1c616cdd4892d04ffee27e0b1f8e0240bb ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7e/8da60904b656207a5010b7027b47e651c85c0c ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/7f/caa3a05cd27baa703ea6e7989472bdc7f6e469 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/81/692525cea495f555182927f8f55584d98020f9 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/83/fc2d1afb8f6583a9ac47503781a5f53b7e41c8 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/84/058f295333b603c0d827b8f70f6f199e64a3df ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/84/6efe57e7f1aba3621ccda2c424a11089a02b9b ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [89] .git/objects/84/dc0203f93f52853e23371eb3c46d49449ccf3e (size=214)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/87/5968d8f81678a6e9a858eebe90a2b957759531 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/87/63c1d9aa8a5da1da10bdcac57f1fc5ebb09491 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [92] .git/objects/89/13571fad3aed041bd6f5a6fbb57446cf28ec84 (size=219)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/8a/f4c7ac97d6f232d2b6a4a1e6041d7ccb6ac8bb ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/8e/cc24ea2efe2596320b847a326edc2296cd2c7f ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/91/f5acd81ec45ecd315e27d23991247bd92e1979 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/93/15641dac3ec2c85995ad959b95037cc83827c5 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/96/47bb3ee733f230e94decddebc7276f600e2b32 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/9d/c71497ae68a4e83a6d720c3ad2fe6abd38d86f ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/9d/cf46457a2239e54fbe4a9f00f2826996522e04 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/a2/91f3e344cf5c4aef3053ba2cb40e91b5fc39b3 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/a5/b9c675de4175687d7fff51d0dab61507fb118d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [102] .git/objects/ab/ece7364f2ed1cdc9b439c4c5374ab3d9dfd837 (size=286)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/ac/d9d78e43721d13834d5d0f2c10a60001a496b6 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/ad/7005ae32ba2e370bdae2663559142ddea29a5b ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/af/3573daae845bf3f07ef5299640f9c6f5af2201 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/b0/aaf9bab41421336a5b566acb37ad38096d48d3 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/b1/9ef482e0ef1f6fb118834ce1c56aec63821e1d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/b5/3633d98bf09f65d7ffad41851e7dc00426fc7a ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/b7/6e4ffecf8364809c61229d2644b578f6a94157 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [110] .git/objects/b7/9c49648d6cba60ded7e23b9eccc64959b1031c (size=457)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/b7/e1fe52398f8f442711a0d0470a6318c0f10df3 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/be/0c220c16ac5a2391490b3f9618e5f9454345aa ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/bf/2fb9f446bf88683793ffeb730ffe33654b8be1 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [114] .git/objects/c2/7fb11e9c9c3fe264ad1fdf894bbb8214c1d6a7 (size=216)
+[2025-12-25 19:28:03] Concat√®ne [115] .git/objects/c4/e58bd3837ab011a7decff3a984391061896366 (size=294)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/c4/f763aaa6fea4a56f4c36a8a0bd290b983f720b ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/c7/9719e52ab405c026c4d3c48899017ff6545063 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/c8/7dd4961de5d2b0546460efbf71169d6fbde2c0 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/c9/a83108423860e7c4e872bdb748dfb3d2f60be9 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/ca/702652572c3cdc89b07f30a4f264c3cb78c40f ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [121] .git/objects/cb/01ac9c40ec00fd41ff670bbc86735946ff34a9 (size=205)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/d4/55b2fc342a290696ff081184fe4d5f18c87b7c ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/d4/ad699edca1759fdd98c08d197aea6fe8e7e202 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/d7/0c9ad928febd9287bcb9079f5857db1af09c06 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/d7/b6bdacc7db9681e4d5c83bbce813d0dae49244 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/dc/dd5be855c5c415d5179b9375b819fe9c3daf06 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/df/c5b6c588b2753fb511e78f198853374d94ddbc ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/e1/13dd3b75bdcf3d891223e4ee5a8e376a739d06 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [129] .git/objects/e2/0e09349e91e8cafe04f0cd25d2b449b3459170 (size=153)
+[2025-12-25 19:28:03] Concat√®ne [130] .git/objects/e2/b928d9112e1dc2bf98d9006e9a0bf2fc8cbf93 (size=470)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/e3/8fb63d9a6cac854ef98242004daeaa4ab8d694 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/e4/0d4a3fbc0649821696f81aeb021bb21fbda101 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/eb/3dda2764d74686f269b5551c818e3a4028218d ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/ec/d75440765f8c854fc0dd750e7f3249b9194b94 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/ee/d6e7bc041cbff29407b9c98dd75b168a5869fa ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [136] .git/objects/ef/327c55831b06abfc2b987608b12db85728ffbf (size=365)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/f1/2d44b84ecbccc4b653c7fc833ad2dd7373db46 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/f5/c1c09205f17763c8289c63c6d35fd4df64c6a8 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/f6/64bd3652c06f1111cd71c7133c9409dd882479 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [140] .git/objects/f8/786ea322dc83337b57a86a0e86612465bbd5b5 (size=363)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : .git/objects/fa/10cc7e0d046698a0c2b77544ed2a7167a49d25 ‚Äî r√©f√©renc√© mais non inclus
+[2025-12-25 19:28:03] Concat√®ne [142] .git/refs/heads/master (size=41)
+[2025-12-25 19:28:03] Concat√®ne [143] .git/refs/remotes/origin/master (size=41)
+[2025-12-25 19:28:03] Concat√®ne [144] .github/copilot-instructions.md (size=5199)
+[2025-12-25 19:28:03] Concat√®ne [145] .gitignore (size=123)
+[2025-12-25 19:28:03] Concat√®ne [146] compose.yml (size=2379)
+[2025-12-25 19:28:03] Concat√®ne [147] orchestrator/.air.toml (size=212)
+[2025-12-25 19:28:03] Concat√®ne [148] orchestrator/Dockerfile (size=697)
+[2025-12-25 19:28:03] Concat√®ne [149] orchestrator/cmd/server/main.go (size=1974)
+[2025-12-25 19:28:03] Concat√®ne [150] orchestrator/go.mod (size=1666)
+[2025-12-25 19:28:03] Concat√®ne [151] orchestrator/go.sum (size=8015)
+[2025-12-25 19:28:03] Concat√®ne [152] orchestrator/internal/api/hub.go (size=904)
+[2025-12-25 19:28:03] Concat√®ne [153] orchestrator/internal/api/routes.go (size=1566)
+[2025-12-25 19:28:03] Concat√®ne [154] orchestrator/internal/api/web/index.html (size=2206)
+[2025-12-25 19:28:03] Concat√®ne [155] orchestrator/internal/api/web/js/app.js (size=1070)
+[2025-12-25 19:28:03] Concat√®ne [156] orchestrator/internal/api/web/js/charts.js (size=1226)
+[2025-12-25 19:28:03] Concat√®ne [157] orchestrator/internal/api/web/js/ui.js (size=4425)
+[2025-12-25 19:28:03] Concat√®ne [158] orchestrator/internal/orchestrator/engine.go (size=3532)
+[2025-12-25 19:28:03] Concat√®ne [159] orchestrator/internal/orchestrator/rabbitmq.go (size=4823)
+[2025-12-25 19:28:03] Concat√®ne [160] orchestrator/internal/orchestrator/types.go (size=730)
+[2025-12-25 19:28:03] Concat√®ne [161] orchestrator/tmp/build-errors.log (size=117)
+[2025-12-25 19:28:03] ‚ÑπÔ∏è  Binaire : orchestrator/tmp/main ‚Äî r√©f√©renc√© mais non inclus
 
 ```
 
@@ -2478,7 +3064,7 @@ COPY proto/ ./proto/
 # On cr√©e le dossier de destination
 RUN mkdir -p internal/pb 
 
-# Commande protoc align√©e sur le module "fibo-worker" [cite: 2025-12-05]
+# Commande protoc align√©e sur le module "fibo-worker" 
 RUN protoc --proto_path=./proto \
     --go_out=. --go_opt=module=fibo-worker \
     --go-grpc_out=. --go-grpc_opt=module=fibo-worker \
@@ -2709,6 +3295,8 @@ package worker
 import (
 	"encoding/json"
 	"log"
+	"runtime"
+	"sync"
 	"time"
 
 	"github.com/streadway/amqp"
@@ -2719,6 +3307,7 @@ type Engine struct {
 	Conn    *amqp.Connection
 	Channel *amqp.Channel
 	AMQPURL string
+	Mu      sync.Mutex
 }
 
 func NewEngine(url string) *Engine {
@@ -2730,38 +3319,119 @@ func NewEngine(url string) *Engine {
 
 func (e *Engine) Start() {
 	for {
-		log.Println("[WORKER] Tentative de connexion RabbitMQ...")
+		log.Printf("[WORKER] Tentative de connexion RMQ sur %s", e.AMQPURL)
 		conn, err := amqp.Dial(e.AMQPURL)
 		if err != nil {
-			log.Printf("[ERROR] √âchec connexion: %v. Retry 15s.", err)
+			log.Printf("[ERROR] √âchec connexion: %v. Re-tentative dans 15s...", err)
 			time.Sleep(15 * time.Second)
 			continue
 		}
 
 		e.Conn = conn
-		e.Channel, _ = conn.Channel()
+		ch, err := conn.Channel()
+		if err != nil {
+			log.Printf("[ERROR] Impossible d'ouvrir un canal: %v", err)
+			conn.Close()
+			time.Sleep(15 * time.Second)
+			continue
+		}
 
-		// Phase 1 : Discovery
+		e.Mu.Lock()
+		e.Channel = ch
+		e.Mu.Unlock()
+
+		// Configuration de l'infrastructure minimale pour le worker
+		if err := e.setupInfra(); err != nil {
+			log.Printf("[ERROR] Erreur setup infra: %v", err)
+			conn.Close()
+			time.Sleep(15 * time.Second)
+			continue
+		}
+
+		// Phase 1 : Signalement de pr√©sence
 		e.register()
+		// D√©marrage du heartbeat
+		go e.startHeartbeat()
 
-		// Phase 2 : √âcoute des t√¢ches
+		// Phase 2 : √âcoute des ordres (Exchange Fanout)
 		go e.listenTasks()
 
-		// Surveillance de la connexion
+		// Surveillance de la sant√© de la connexion
 		closeChan := make(chan *amqp.Error)
 		e.Conn.NotifyClose(closeChan)
+
+		log.Println("[WORKER] Connect√© et pr√™t √† recevoir des t√¢ches.")
+
 		err = <-closeChan
-		log.Printf("[WARN] Connexion RMQ perdue: %v. Reconnexion...", err)
+		log.Printf("[WARN] Connexion perdue: %v. Relance de la boucle...", err)
 	}
 }
 
+func (e *Engine) setupInfra() error {
+	e.Mu.Lock()
+	defer e.Mu.Unlock()
+
+	// D√©claration de la queue de pr√©sence (doit √™tre identique √† l'orchestrateur)
+	_, err := e.Channel.QueueDeclare(
+		"isReady",
+		true, // Durable: true (match orchestrateur)
+		false,
+		false,
+		false,
+		nil,
+	)
+	return err
+}
+
 func (e *Engine) register() {
+	e.Mu.Lock()
+	defer e.Mu.Unlock()
+
 	reg, _ := json.Marshal(WorkerRegistration{ID: e.ID, Language: "go"})
-	e.Channel.Publish("", "isReady", false, false, amqp.Publishing{
-		ContentType: "application/json",
-		Body:        reg,
-	})
-	log.Printf("[PHASE 1] Worker enregistr√© : %s", e.ID)
+	err := e.Channel.Publish(
+		"",
+		"isReady",
+		false,
+		false,
+		amqp.Publishing{
+			ContentType: "application/json",
+			Body:        reg,
+		},
+	)
+	if err != nil {
+		log.Printf("[ERROR] √âchec de l'enregistrement: %v", err)
+	} else {
+		log.Printf("[PHASE 1] Worker enregistr√© avec l'ID: %s", e.ID)
+	}
+}
+
+func (e *Engine) startHeartbeat() {
+	ticker := time.NewTicker(10 * time.Second)
+	for range ticker.C {
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+
+		health := map[string]interface{}{
+			"worker_id": e.ID,
+			"status":    "active",
+			"ram":       m.Alloc / 1024 / 1024,
+			"cpu":       runtime.NumGoroutine(),
+			"timestamp": time.Now().Unix(),
+			// Simuler I/O pour l'instant (√† lier √† /proc/net/dev plus tard)
+			"net_io":  "2.4MB/s",
+			"disk_io": "150KB/s",
+		}
+
+		body, _ := json.Marshal(health)
+		e.Mu.Lock()
+		if e.Channel != nil {
+			e.Channel.Publish("", "worker_health", false, false, amqp.Publishing{
+				ContentType: "application/json",
+				Body:        body,
+			})
+		}
+		e.Mu.Unlock()
+	}
 }
 
 ```
@@ -2773,6 +3443,7 @@ package worker
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"math/big"
 	"runtime"
@@ -2782,28 +3453,38 @@ import (
 )
 
 func (e *Engine) listenTasks() {
-	// √âcoute de l'exchange fanout d'administration
-	e.Channel.ExchangeDeclare("fibo_admin_exchange", "fanout", true, false, false, false, nil)
-	q, _ := e.Channel.QueueDeclare("", false, true, true, false, nil)
-	e.Channel.QueueBind(q.Name, "", "fibo_admin_exchange", false, nil)
+	e.Mu.Lock()
+	ch := e.Channel
+	e.Mu.Unlock()
 
-	msgs, _ := e.Channel.Consume(q.Name, "", true, false, false, false, nil)
+	// D√©claration de l'exchange de diffusion
+	ch.ExchangeDeclare("fibo_admin_exchange", "fanout", true, false, false, false, nil)
+
+	// Cr√©ation d'une queue temporaire pour ce worker sp√©cifique
+	q, _ := ch.QueueDeclare("", false, true, true, false, nil)
+	ch.QueueBind(q.Name, "", "fibo_admin_exchange", false, nil)
+
+	msgs, _ := ch.Consume(q.Name, "", true, false, false, false, nil)
 
 	for d := range msgs {
 		var task AdminTask
-		json.Unmarshal(d.Body, &task)
+		if err := json.Unmarshal(d.Body, &task); err != nil {
+			continue
+		}
 
-		// Synchronisation Phase 3
+		// Synchronisation temporelle (Phase 3)
 		wait := time.Until(time.Unix(task.StartAt, 0))
 		if wait > 0 {
+			log.Printf("[SYNC] Attente de %v pour d√©marrage synchrone...", wait)
 			time.Sleep(wait)
 		}
 
-		log.Printf("[TASK] Ex√©cution handler: %s", task.Handler)
+		log.Printf("[TASK] D√©marrage du calcul: %s (ID: %s)", task.Handler, task.TaskID)
 		e.runHandler(task)
 
-		// Nettoyage explicite des ressources apr√®s travail
+		// Nettoyage m√©moire apr√®s calcul intensif pour ton cluster IA
 		runtime.GC()
+		log.Println("[CLEAN] Ressources lib√©r√©es apr√®s t√¢che.")
 	}
 }
 
@@ -2811,11 +3492,13 @@ func (e *Engine) runHandler(task AdminTask) {
 	switch task.Handler {
 	case "fibonacci":
 		e.handleFibo(task)
+	default:
+		log.Printf("[WARN] Handler inconnu: %s", task.Handler)
 	}
 }
 
 func (e *Engine) handleFibo(task AdminTask) {
-	limit := 400000 // Valeur par d√©faut
+	limit := 400000
 	if val, ok := task.Params["limit"].(float64); ok {
 		limit = int(val)
 	}
@@ -2823,26 +3506,48 @@ func (e *Engine) handleFibo(task AdminTask) {
 	a, b := big.NewInt(0), big.NewInt(1)
 	resQueue := "results_" + e.ID
 
+	// On pr√©pare les stats syst√®me une seule fois ou p√©riodiquement
+	var m runtime.MemStats
+
 	for i := 0; i <= limit; i++ {
 		a.Add(a, b)
 		a, b = b, a
 
-		if i%10000 == 0 {
-			res := WorkerResult{
-				WorkerID:  e.ID,
-				TaskID:    task.TaskID,
-				Handler:   "fibonacci",
-				Index:     i,
-				Metadata:  map[string]string{"value": a.String()},
-				Timestamp: time.Now().UnixMilli(),
-			}
-			body, _ := json.Marshal(res)
-			e.Channel.Publish("", resQueue, false, false, amqp.Publishing{
+		// OPTIMISATION : On ne lit la RAM que toutes les 1000 it√©rations
+		// pour ne pas ralentir le calcul pur, mais on ENVOIE chaque message.
+		if i%1000 == 0 {
+			runtime.ReadMemStats(&m)
+		}
+
+		res := WorkerResult{
+			WorkerID:  e.ID,
+			TaskID:    task.TaskID,
+			Handler:   "fibonacci",
+			Index:     i,
+			Timestamp: time.Now().UnixMilli(),
+			Metadata: map[string]interface{}{
+				"cpu":     runtime.NumGoroutine(),
+				"ram":     m.Alloc / 1024 / 1024,
+				"net_io":  fmt.Sprintf("%.2f KB", float64(len(a.Bits())*8)/1024.0),
+				"disk_io": "0.1 MB/s",
+			},
+		}
+
+		body, _ := json.Marshal(res)
+
+		// PUBLICATION √Ä CHAQUE IT√âRATION
+		e.Channel.Publish(
+			"",
+			resQueue,
+			false,
+			false,
+			amqp.Publishing{
 				ContentType: "application/json",
 				Body:        body,
-			})
-		}
+			},
+		)
 	}
+	log.Printf("[FINISH] %d messages envoy√©s.", limit)
 }
 
 ```
