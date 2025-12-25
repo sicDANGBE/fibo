@@ -13,16 +13,25 @@ export function updateWorkerMetrics(workerId, metadata) {
     const el = document.getElementById(`worker-${workerId}`);
     if (!el) return;
 
-    // Mise à jour des stats dans la carte
-    const statsEl = el.querySelector('.worker-stats');
-    if (statsEl) {
-        statsEl.innerHTML = `
-            <div class="grid grid-cols-2 gap-2 mt-2 text-[10px] font-mono">
-                <div class="text-blue-300">CPU: <span class="text-white">${metadata.cpu} thr</span></div>
-                <div class="text-emerald-300">RAM: <span class="text-white">${metadata.ram}MB</span></div>
-            </div>
-        `;
+    const statsContainer = el.querySelector('.worker-stats') || document.createElement('div');
+    if (!el.querySelector('.worker-stats')) {
+        statsContainer.className = "worker-stats mt-3 pt-2 border-t border-slate-600/30 grid grid-cols-2 gap-2";
+        el.appendChild(statsContainer);
     }
+
+    statsContainer.innerHTML = `
+        <div class="flex flex-col">
+            <span class="text-[9px] text-slate-500 uppercase">Load</span>
+            <span class="text-xs font-mono text-blue-400">${metadata.cpu} gor</span>
+        </div>
+        <div class="flex flex-col text-right">
+            <span class="text-[9px] text-slate-500 uppercase">Mem</span>
+            <span class="text-xs font-mono text-emerald-400">${metadata.ram}MB</span>
+        </div>
+        <div class="col-span-2 text-center text-[10px] text-slate-400 font-mono mt-1">
+            Data Stream: ${(metadata.net / 1024).toFixed(2)} KB
+        </div>
+    `;
 }
 
 export function updateWorkerList(worker) {
