@@ -2,6 +2,7 @@ package worker
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"math/big"
 	"runtime"
@@ -64,33 +65,46 @@ func (e *Engine) handleFibo(task AdminTask) {
 	a, b := big.NewInt(0), big.NewInt(1)
 	resQueue := "results_" + e.ID
 
+	// On prépare les stats système une seule fois ou périodiquement
+	var m runtime.MemStats
+
 	for i := 0; i <= limit; i++ {
 		a.Add(a, b)
 		a, b = b, a
 
-		if i%10000 == 0 {
-			// Collecte des statistiques RAM
-			var m runtime.MemStats
+		// OPTIMISATION : On ne lit la RAM que toutes les 1000 itérations
+		// pour ne pas ralentir le calcul pur, mais on ENVOIE chaque message.
+		if i%1000 == 0 {
 			runtime.ReadMemStats(&m)
+		}
 
-			res := WorkerResult{
-				WorkerID:  e.ID,
-				TaskID:    task.TaskID,
-				Handler:   "fibonacci",
-				Index:     i,
-				Timestamp: time.Now().UnixMilli(),
-				Metadata: map[string]interface{}{
-					"cpu": runtime.NumGoroutine(),  // Nombre de threads/goroutines actifs
-					"ram": m.Alloc / 1024 / 1024,   // RAM en MB
-					"net": len(a.Bits()) * 8,       // Taille estimée du payload en octets
-					"val": a.String()[:10] + "...", // Aperçu de la valeur
-				},
-			}
-			body, _ := json.Marshal(res)
-			e.Channel.Publish("", resQueue, false, false, amqp.Publishing{
+		res := WorkerResult{
+			WorkerID:  e.ID,
+			TaskID:    task.TaskID,
+			Handler:   "fibonacci",
+			Index:     i,
+			Timestamp: time.Now().UnixMilli(),
+			Metadata: map[string]interface{}{
+				"cpu":     runtime.NumGoroutine(),
+				"ram":     m.Alloc / 1024 / 1024,
+				"net_io":  fmt.Sprintf("%.2f KB", float64(len(a.Bits())*8)/1024.0),
+				"disk_io": "0.1 MB/s",
+			},
+		}
+
+		body, _ := json.Marshal(res)
+
+		// PUBLICATION À CHAQUE ITÉRATION
+		e.Channel.Publish(
+			"",
+			resQueue,
+			false,
+			false,
+			amqp.Publishing{
 				ContentType: "application/json",
 				Body:        body,
-			})
-		}
+			},
+		)
 	}
+	log.Printf("[FINISH] %d messages envoyés.", limit)
 }

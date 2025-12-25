@@ -2,7 +2,9 @@ package worker
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
+	"runtime"
 	"sync"
 	"time"
 
@@ -57,6 +59,8 @@ func (e *Engine) Start() {
 
 		// Phase 1 : Signalement de présence
 		e.register()
+		// Démarrage du heartbeat
+		go e.startHeartbeat()
 
 		// Phase 2 : Écoute des ordres (Exchange Fanout)
 		go e.listenTasks()
@@ -90,22 +94,69 @@ func (e *Engine) setupInfra() error {
 
 func (e *Engine) register() {
 	e.Mu.Lock()
+	ch := e.Channel
 	defer e.Mu.Unlock()
 
+	// 1. Créer la file d'attente pour la confirmation (Auto-delete pour le nettoyage)
+	ackQueue := fmt.Sprintf("ack_%s", e.ID)
+	_, err := ch.QueueDeclare(ackQueue, false, true, false, false, nil)
+	if err != nil {
+		log.Fatalf("[CRITICAL] Impossible de créer la file ACK: %v", err)
+	}
+
+	// 2. Envoyer la demande d'enregistrement
 	reg, _ := json.Marshal(WorkerRegistration{ID: e.ID, Language: "go"})
-	err := e.Channel.Publish(
-		"",
-		"isReady",
-		false,
-		false,
-		amqp.Publishing{
-			ContentType: "application/json",
-			Body:        reg,
-		},
-	)
+	ch.Publish("", "isReady", false, false, amqp.Publishing{
+		ContentType: "application/json",
+		Body:        reg,
+	})
+
+	// 3. Bloquer jusqu'à réception du signal "READY" de l'orchestrateur
+	msgs, _ := ch.Consume(ackQueue, "", true, false, false, false, nil)
+	log.Println("[WAIT] En attente de la validation de l'orchestrateur...")
+
+	for d := range msgs {
+		if string(d.Body) == "READY" {
+			log.Printf("[PHASE 1] Enregistrement validé. Stream prêt.")
+			break
+		}
+	}
+
+	// Nettoyage de la file ACK
+	ch.QueueDelete(ackQueue, false, false, false)
+
 	if err != nil {
 		log.Printf("[ERROR] Échec de l'enregistrement: %v", err)
 	} else {
 		log.Printf("[PHASE 1] Worker enregistré avec l'ID: %s", e.ID)
+	}
+}
+
+func (e *Engine) startHeartbeat() {
+	ticker := time.NewTicker(10 * time.Second)
+	for range ticker.C {
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+
+		health := map[string]interface{}{
+			"worker_id": e.ID,
+			"status":    "active",
+			"ram":       m.Alloc / 1024 / 1024,
+			"cpu":       runtime.NumGoroutine(),
+			"timestamp": time.Now().Unix(),
+			// Simuler I/O pour l'instant (à lier à /proc/net/dev plus tard)
+			"net_io":  "2.4MB/s",
+			"disk_io": "150KB/s",
+		}
+
+		body, _ := json.Marshal(health)
+		e.Mu.Lock()
+		if e.Channel != nil {
+			e.Channel.Publish("", "worker_health", false, false, amqp.Publishing{
+				ContentType: "application/json",
+				Body:        body,
+			})
+		}
+		e.Mu.Unlock()
 	}
 }

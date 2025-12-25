@@ -16,7 +16,7 @@ COPY proto/ ./proto/
 # On crée le dossier de destination
 RUN mkdir -p internal/pb 
 
-# Commande protoc alignée sur le module "fibo-worker" [cite: 2025-12-05]
+# Commande protoc alignée sur le module "fibo-worker" 
 RUN protoc --proto_path=./proto \
     --go_out=. --go_opt=module=fibo-worker \
     --go-grpc_out=. --go-grpc_opt=module=fibo-worker \
