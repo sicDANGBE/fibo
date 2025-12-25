@@ -64,16 +64,12 @@ func (e *Engine) handleFibo(task AdminTask) {
 	a, b := big.NewInt(0), big.NewInt(1)
 	resQueue := "results_" + e.ID
 
-	// On s'assure que la queue de résultats existe (Phase 2 & 4)
-	e.Mu.Lock()
-	e.Channel.QueueDeclare(resQueue, false, true, false, false, nil)
-	e.Mu.Unlock()
-
 	for i := 0; i <= limit; i++ {
 		a.Add(a, b)
 		a, b = b, a
 
 		if i%10000 == 0 {
+			// Collecte des statistiques RAM
 			var m runtime.MemStats
 			runtime.ReadMemStats(&m)
 
@@ -84,20 +80,17 @@ func (e *Engine) handleFibo(task AdminTask) {
 				Index:     i,
 				Timestamp: time.Now().UnixMilli(),
 				Metadata: map[string]interface{}{
-					"value": a.String()[:10] + "...", // Troncature pour éviter les gros messages
-					"cpu":   runtime.NumGoroutine(),  // Approximation du CPU utilisé
-					"ram":   m.Alloc / 1024 / 1024,   // RAM en MB
+					"cpu": runtime.NumGoroutine(),  // Nombre de threads/goroutines actifs
+					"ram": m.Alloc / 1024 / 1024,   // RAM en MB
+					"net": len(a.Bits()) * 8,       // Taille estimée du payload en octets
+					"val": a.String()[:10] + "...", // Aperçu de la valeur
 				},
 			}
 			body, _ := json.Marshal(res)
-
-			e.Mu.Lock()
 			e.Channel.Publish("", resQueue, false, false, amqp.Publishing{
 				ContentType: "application/json",
 				Body:        body,
 			})
-			e.Mu.Unlock()
 		}
 	}
-	log.Printf("[FINISH] Tâche %s terminée.", task.TaskID)
 }
