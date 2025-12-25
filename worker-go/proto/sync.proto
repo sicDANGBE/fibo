@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sync;
+
+// CORRECTION : Le chemin DOIT commencer par le nom du module défini dans go.mod
+option go_package = "fibo-worker/internal/pb"; 
+
+service Barrier {
+    rpc WaitToStart (Empty) returns (StartSignal);
+}
+
+message Empty {}
+message StartSignal {
+    string message = 1;
+}

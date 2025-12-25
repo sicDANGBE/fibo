@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-slate-900 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark IA Orchestrator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="min-h-screen">
+    <div id="app" class="p-6 lg:p-12">
+        <header class="flex justify-between items-center mb-8 border-b border-slate-800 pb-6">
+            <h1 class="text-2xl font-black tracking-tighter text-blue-500 italic">BENCHMARK_LEADER_V1</h1>
+            <div id="ws-status" class="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_red] transition-all duration-500"></div>
+        </header>
+
+        <div class="grid grid-cols-12 gap-8">
+            <aside class="col-span-12 lg:col-span-3 space-y-6">
+                <section class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Commandes</h2>
+                    <button id="btn-fibo" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-black text-sm tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-900/20">
+                        LAUNCH_FIBONACCI
+                    </button>
+                </section>
+
+                <section class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Cluster Workers</h2>
+                    <div id="worker-list" class="space-y-3">
+                        </div>
+                </section>
+            </aside>
+
+            <main class="col-span-12 lg:col-span-9 bg-slate-800 p-8 rounded-[2.5rem] border border-slate-700 shadow-2xl overflow-hidden relative">
+                <div class="absolute top-0 right-0 p-4 text-[10px] font-mono text-slate-600 uppercase">Realtime_Stream_Active</div>
+                <canvas id="mainChart" class="w-full"></canvas>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
