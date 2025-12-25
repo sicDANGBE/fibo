@@ -25,7 +25,7 @@ func (s *server) WaitToStart(ctx context.Context, in *pb.Empty) (*pb.StartSignal
 	s.mu.Lock()
 	s.readyCount++
 	fmt.Printf("[gRPC] Client connecté. Total : %d/2\n", s.readyCount)
-	if s.readyCount >= 2 {
+	if s.readyCount >= 3 {
 		s.cond.Broadcast()
 	} else {
 		s.cond.Wait()
@@ -75,7 +75,7 @@ func main() {
 	// 3. Attente de la barrière de synchronisation pour le worker GO lui-même
 	fmt.Println("[GO] En attente de Node.js et Python...")
 	s.mu.Lock()
-	for s.readyCount < 2 {
+	for s.readyCount < 3 {
 		s.cond.Wait()
 	}
 	s.mu.Unlock()

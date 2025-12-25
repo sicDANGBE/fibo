@@ -1,21 +1,65 @@
-[2025-12-23 00:40:11] Source  : .
-[2025-12-23 00:40:11] Sortie  : project_export.md
-[2025-12-23 00:40:11] Fichiers trouvés (avant filtre): 15
-[2025-12-23 00:40:11] Fichiers à concaténer (après filtre): 14 (exclus auto:1 dir:0 file:0)
-[2025-12-23 00:40:11] Concatène [1] compose.yml (size=697)
-[2025-12-23 00:40:11] Concatène [2] go/Dockerfile (size=802)
-[2025-12-23 00:40:11] Concatène [3] go/go.mod (size=365)
-[2025-12-23 00:40:11] Concatène [4] go/go.sum (size=3182)
-[2025-12-23 00:40:11] Concatène [5] go/main.go (size=2057)
-[2025-12-23 00:40:11] Concatène [6] go/pb/sync.pb.go (size=0)
-[2025-12-23 00:40:11] Concatène [7] go/pb/sync_grpc.pb.go (size=0)
-[2025-12-23 00:40:11] Concatène [8] main.go (size=1476)
-[2025-12-23 00:40:11] Concatène [9] node/Dockerfile (size=215)
-[2025-12-23 00:40:11] Concatène [10] node/index.js (size=836)
-[2025-12-23 00:40:11] Concatène [11] project_export.log (size=852)
-[2025-12-23 00:40:11] Concatène [12] proto/sync.proto (size=267)
-[2025-12-23 00:40:11] Concatène [13] python/Dockerfile (size=343)
-[2025-12-23 00:40:11] Concatène [14] python/main.py (size=618)
-[2025-12-23 00:40:11] Concaténation Markdown terminée : 14 fichier(s), 11710 octets.
-[2025-12-23 00:40:11] Aucune règle d’anonymisation — étape sautée.
-[2025-12-23 00:40:11] Terminé. Log détaillé: project_export.log
+[2025-12-25 15:13:06] Source  : .
+[2025-12-25 15:13:06] Sortie  : project_export.md
+[2025-12-25 15:13:06] Fichiers trouvés (avant filtre): 59
+[2025-12-25 15:13:06] Fichiers à concaténer (après filtre): 58 (exclus auto:1 dir:0 file:0)
+[2025-12-25 15:13:06] Concatène [1] .git/COMMIT_EDITMSG (size=64)
+[2025-12-25 15:13:06] Concatène [2] .git/HEAD (size=23)
+[2025-12-25 15:13:06] Concatène [3] .git/config (size=258)
+[2025-12-25 15:13:06] Concatène [4] .git/description (size=73)
+[2025-12-25 15:13:06] Concatène [5] .git/hooks/applypatch-msg.sample (size=478)
+[2025-12-25 15:13:06] Concatène [6] .git/hooks/commit-msg.sample (size=896)
+[2025-12-25 15:13:06] Concatène [7] .git/hooks/fsmonitor-watchman.sample (size=4726)
+[2025-12-25 15:13:06] Concatène [8] .git/hooks/post-update.sample (size=189)
+[2025-12-25 15:13:06] Concatène [9] .git/hooks/pre-applypatch.sample (size=424)
+[2025-12-25 15:13:06] Concatène [10] .git/hooks/pre-commit.sample (size=1643)
+[2025-12-25 15:13:06] Concatène [11] .git/hooks/pre-merge-commit.sample (size=416)
+[2025-12-25 15:13:06] Concatène [12] .git/hooks/pre-push.sample (size=1374)
+[2025-12-25 15:13:06] Concatène [13] .git/hooks/pre-rebase.sample (size=4898)
+[2025-12-25 15:13:06] Concatène [14] .git/hooks/pre-receive.sample (size=544)
+[2025-12-25 15:13:06] Concatène [15] .git/hooks/prepare-commit-msg.sample (size=1492)
+[2025-12-25 15:13:06] Concatène [16] .git/hooks/push-to-checkout.sample (size=2783)
+[2025-12-25 15:13:06] Concatène [17] .git/hooks/sendemail-validate.sample (size=2308)
+[2025-12-25 15:13:06] Concatène [18] .git/hooks/update.sample (size=3650)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/index — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [20] .git/info/exclude (size=240)
+[2025-12-25 15:13:06] Concatène [21] .git/logs/HEAD (size=211)
+[2025-12-25 15:13:06] Concatène [22] .git/logs/refs/heads/master (size=211)
+[2025-12-25 15:13:06] Concatène [23] .git/logs/refs/remotes/origin/master (size=144)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/12/a122ea7678e77dcb0ffc86aeca9c7d69bd816d — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [25] .git/objects/20/708f6a2ef877be2ccc2101160dbce8791b4604 (size=273)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/37/ae47ae280e513c8aa2129bd8132aefba977851 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/5a/50d4c26668c2b5b465756529b5868e7f109e11 — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [28] .git/objects/5d/ab255ae1904e7a27735e3c9641a108451695d3 (size=206)
+[2025-12-25 15:13:06] Concatène [29] .git/objects/5e/1af68ac259b3f3f34291e2803d602d13ce9fd5 (size=206)
+[2025-12-25 15:13:06] Concatène [30] .git/objects/5f/7131495b2d34d83cb08d08a31f739f2fa24949 (size=475)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/6d/6408a5bb8411448f2ee0f3e05078f8e13ff684 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/87/63c1d9aa8a5da1da10bdcac57f1fc5ebb09491 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/9d/c71497ae68a4e83a6d720c3ad2fe6abd38d86f — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/9d/cf46457a2239e54fbe4a9f00f2826996522e04 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/a2/91f3e344cf5c4aef3053ba2cb40e91b5fc39b3 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/ac/d9d78e43721d13834d5d0f2c10a60001a496b6 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/b7/6e4ffecf8364809c61229d2644b578f6a94157 — référencé mais non inclus
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/be/0c220c16ac5a2391490b3f9618e5f9454345aa — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [39] .git/objects/c2/7fb11e9c9c3fe264ad1fdf894bbb8214c1d6a7 (size=216)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/d7/0c9ad928febd9287bcb9079f5857db1af09c06 — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [41] .git/objects/e2/b928d9112e1dc2bf98d9006e9a0bf2fc8cbf93 (size=470)
+[2025-12-25 15:13:06] Concatène [42] .git/objects/ef/327c55831b06abfc2b987608b12db85728ffbf (size=365)
+[2025-12-25 15:13:06] ℹ️  Binaire : .git/objects/f5/c1c09205f17763c8289c63c6d35fd4df64c6a8 — référencé mais non inclus
+[2025-12-25 15:13:06] Concatène [44] .git/refs/heads/master (size=41)
+[2025-12-25 15:13:06] Concatène [45] .git/refs/remotes/origin/master (size=41)
+[2025-12-25 15:13:06] Concatène [46] .gitignore (size=123)
+[2025-12-25 15:13:06] Concatène [47] compose.yml (size=697)
+[2025-12-25 15:13:06] Concatène [48] go/Dockerfile (size=909)
+[2025-12-25 15:13:06] Concatène [49] go/go.mod (size=365)
+[2025-12-25 15:13:06] Concatène [50] go/go.sum (size=3182)
+[2025-12-25 15:13:06] Concatène [51] go/main.go (size=2057)
+[2025-12-25 15:13:06] Concatène [52] main.go (size=1476)
+[2025-12-25 15:13:06] Concatène [53] node/Dockerfile (size=257)
+[2025-12-25 15:13:06] Concatène [54] node/index.js (size=836)
+[2025-12-25 15:13:06] Concatène [55] project_export.log (size=5092)
+[2025-12-25 15:13:06] Concatène [56] proto/sync.proto (size=285)
+[2025-12-25 15:13:06] Concatène [57] python/Dockerfile (size=378)
+[2025-12-25 15:13:06] Concatène [58] python/main.py (size=618)
+[2025-12-25 15:13:06] Concaténation Markdown terminée : 44 fichier(s), 45613 octets.
+[2025-12-25 15:13:06] Aucune règle d’anonymisation — étape sautée.
+[2025-12-25 15:13:06] Terminé. Log détaillé: project_export.log

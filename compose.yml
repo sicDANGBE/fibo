@@ -15,6 +15,8 @@ services:
     build:
       context: .
       dockerfile: python/Dockerfile
+    environment:
+      - AMQP_URL=amqp://bench_leader:qsd65f4c98dc7fd9s87ga6fsd5g4zsdrf9g879dfs7g@192.168.1.12:5672/benchmarks
     depends_on: [fibo-go]
     deploy:
       resources:
@@ -35,6 +37,18 @@ services:
           memory: 5G
     networks: [fibo-net]
 
+
+  fibo-rust:
+      build:
+        context: .
+        dockerfile: rust/Dockerfile
+      depends_on: [fibo-go]
+      deploy:
+        resources:
+          limits:
+            cpus: '5.0'
+            memory: 5G
+      networks: [fibo-net]
 networks:
   fibo-net:
     driver: bridge
