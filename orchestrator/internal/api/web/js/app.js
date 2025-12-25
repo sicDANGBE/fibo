@@ -1,4 +1,4 @@
-import { updateWorkerList, updateStatus } from './ui.js';
+import { updateWorkerList, updateStatus ,updateHealthData} from './ui.js';
 import { initChart, addDataToChart } from './charts.js';
 
 const socket = new WebSocket(`ws://${window.location.host}/ws`);
@@ -16,6 +16,9 @@ socket.onmessage = (event) => {
         case "RESULT":
             addDataToChart(msg.data);
             updateWorkerMetrics(msg.data.worker_id, msg.data.metadata); // Mise à jour IHM temps réel
+            break;
+        case "HEALTH_UPDATE":
+            updateHealthData(msg.data);
             break;
     }
 };

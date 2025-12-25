@@ -41,18 +41,54 @@ export function updateWorkerList(worker) {
 
     const el = document.createElement('div');
     el.id = id;
-    el.className = "p-4 bg-slate-700/50 rounded-xl border border-slate-600 mb-3";
+    // Ajout des classes pour l'expansion et l'interactivité 
+    el.className = "p-4 bg-slate-800/80 rounded-2xl border border-slate-700 cursor-pointer transition-all duration-300 hover:border-blue-500 overflow-hidden mb-4";
+    
+    el.onclick = () => {
+        // Toggle pour agrandir la tuile sur tout le conteneur si besoin
+        el.classList.toggle('ring-2');
+        el.classList.toggle('ring-blue-500');
+        el.querySelector('.metrics-grid').classList.toggle('hidden');
+    };
+
     el.innerHTML = `
-        <div class="flex items-center justify-between mb-2">
+        <div class="flex justify-between items-center">
             <div class="flex flex-col">
-                <span class="font-bold text-blue-400 text-xs">${worker.language.toUpperCase()}</span>
-                <span class="text-[9px] font-mono text-slate-500">${worker.id.substring(0,8)}</span>
+                <span class="text-xs font-black text-blue-400 italic tracking-tighter">${worker.language.toUpperCase()}</span>
+                <span class="text-[9px] font-mono text-slate-500">${worker.id.substring(0,16)}</span>
             </div>
-            <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_5px_emerald]"></div>
+            <div class="status-dot w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_emerald]"></div>
         </div>
-        <div class="worker-stats border-t border-slate-600/50 pt-2">
-            <span class="text-[10px] text-slate-500 italic">Waiting for metrics...</span>
+        
+        <div class="metrics-grid hidden mt-4 pt-4 border-t border-slate-700 grid grid-cols-2 gap-4">
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">RAM Usage</p>
+                <p class="ram-val text-sm font-black text-white">-- MB</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">CPU Threads</p>
+                <p class="cpu-val text-sm font-black text-white">-- gor</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">Net I/O</p>
+                <p class="net-val text-xs font-mono text-slate-300">--</p>
+            </div>
+            <div class="metric-box bg-slate-900/50 p-3 rounded-xl">
+                <p class="text-[8px] text-slate-500 uppercase font-bold">Disk Activity</p>
+                <p class="disk-val text-xs font-mono text-slate-300">--</p>
+            </div>
         </div>
     `;
     list.appendChild(el);
+}
+
+export function updateHealthData(data) {
+    const el = document.getElementById(`worker-${data.worker_id}`);
+    if (!el) return;
+    console.log('Updating health data for', data.worker_id, data);
+    // Mise à jour des valeurs en temps réel 
+    el.querySelector('.ram-val').innerText = `${data.ram} MB`;
+    el.querySelector('.cpu-val').innerText = `${data.cpu} thr`;
+    el.querySelector('.net-val').innerText = data.net_io;
+    el.querySelector('.disk-val').innerText = data.disk_io;
 }

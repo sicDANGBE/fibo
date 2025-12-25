@@ -3,6 +3,8 @@ package orchestrator
 type WorkerRegistration struct {
 	ID       string `json:"id"`
 	Language string `json:"language"`
+	// Utilise "-" pour que ce ne soit pas envoyé à l'IHM, mais reste accessible en Go
+	LastSeen int64 `json:"_"`
 }
 
 type AdminTask struct {
