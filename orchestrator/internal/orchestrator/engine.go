@@ -64,13 +64,30 @@ func (o *Engine) StartTask(handler string, params map[string]interface{}) {
 	}
 }
 
-// ConsumeWorkerResults traite les messages entrants de chaque langage (Phase 4)
+// ConsumeWorkerResults traite les messages entrants de chaque langage
+
 func (o *Engine) ConsumeWorkerResults(queueName string) {
 	o.Mu.Lock()
 	ch := o.Channel
 	o.Mu.Unlock()
 
-	msgs, err := ch.Consume(queueName, "", true, false, false, false, nil)
+	// 1. FIX 406 : Définir le prefetch count obligatoire pour les Streams
+	// On limite à 100 messages non-acquittés sur le canal
+	if err := ch.Qos(100, 0, false); err != nil {
+		log.Printf("[RMQ] Erreur QoS: %v", err)
+		return
+	}
+
+	// 2. Consommation du flux Stream
+	msgs, err := ch.Consume(
+		queueName,
+		"",
+		false, // AUTO-ACK DOIT ÊTRE FALSE POUR LES STREAMS
+		false,
+		false,
+		false,
+		amqp.Table{"x-stream-offset": "next"}, // On ne lit que les nouveaux messages
+	)
 	if err != nil {
 		log.Printf("[RMQ] Erreur consommation %s: %v", queueName, err)
 		return
@@ -78,11 +95,12 @@ func (o *Engine) ConsumeWorkerResults(queueName string) {
 
 	for d := range msgs {
 		var res WorkerResult
-		if err := json.Unmarshal(d.Body, &res); err != nil {
-			continue
+		if err := json.Unmarshal(d.Body, &res); err == nil {
+			// On enrichit l'UI avec les données reçues (Index, CPU, RAM, Net)
+			o.BroadcastToUI("RESULT", res)
+			// 3. Acquittement manuel indispensable pour les Streams
+			d.Ack(false)
 		}
-		// Envoi immédiat vers l'UI via le hub WebSocket
-		o.BroadcastToUI("RESULT", res)
 	}
 }
 
